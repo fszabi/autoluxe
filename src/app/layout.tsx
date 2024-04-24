@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Nav from "./Nav";
+import "animate.css";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
@@ -14,7 +14,22 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Gösi & Kertész Services",
-  keywords: ["autómosás", "autóápolás", "autó tisztítás"],
+  keywords: [
+    "házhoz jön autómosó",
+    "autómosás",
+    "autóápolás",
+    "autó tisztítás",
+    "autó tisztítás szolgáltatás",
+    "autó tisztítás specialisták",
+    "autó tisztítás professzionális módon",
+    "autó kárpit tisztítás",
+    "kocsimosás",
+    "autókozmetika szolgáltatások",
+    "kocsimosás közelben",
+    "autó kozmetika árak",
+    "győr autómosás",
+    "mosonmagyaróvár autómosás",
+  ],
   description:
     "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",
   icons: {
@@ -28,13 +43,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className="scroll-smooth" lang="en" suppressHydrationWarning>
       <body
         className={`${montserrat.variable} font-montserrat bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50`}
       >
         <ThemeProvider defaultTheme="system" attribute="class">
-          <Nav />
-          <main>{children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>

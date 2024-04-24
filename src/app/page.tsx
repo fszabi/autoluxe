@@ -1,15 +1,13 @@
-import Contact from "./Contact";
-import Features from "./Features";
-import Hero from "./Hero";
-import Pricing from "./Pricing";
+import Footer from "./Footer";
+import Header from "./Header";
+import Main from "./Main";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Features />
-      <Pricing />
-      <Contact />
+      <Header />
+      <Main />
+      <Footer />
     </>
   );
 }

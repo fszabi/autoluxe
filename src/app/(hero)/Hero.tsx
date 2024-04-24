@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section className="relative isolate px-6 pt-14 lg:px-8">
       <div
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80 pointer-events-none"
         aria-hidden="true"
       >
         <div
@@ -23,16 +23,16 @@ const Hero = () => {
         </div>
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Unod már a kocsi takarítást?
+            Unod már az autó takarítást?
           </h1>
           <p className="mt-6 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
-            Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról
+            Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról,
             ránk számíthatsz!
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="#"
-              className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 transition-colors"
+              href="#pricing"
+              className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-neutral-50 shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
             >
               Vágj bele
             </Link>
@@ -40,7 +40,7 @@ const Hero = () => {
         </div>
       </div>
       <div
-        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-45rem)]"
+        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-45rem)] pointer-events-none"
         aria-hidden="true"
       >
         <div
