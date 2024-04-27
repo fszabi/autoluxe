@@ -1,4 +1,3 @@
-import { CheckIcon } from "@heroicons/react/20/solid";
 import CustomForm from "./CustomForm";
 
 interface Props {

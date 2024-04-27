@@ -3,7 +3,7 @@ import {
   ClockIcon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
-import car from "/public/assets/car.jpg";
+import car from "/public/assets/images/car.jpg";
 import Image from "next/image";
 
 const features = [

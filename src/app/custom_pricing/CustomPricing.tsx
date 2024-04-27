@@ -1,27 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Modal from "react-modal";
-import ModalForm from "./CustomForm";
+import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import classNames from "classnames";
+import { Fragment, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import serviceCategories from "../utils/serviceCategories";
+import tiers from "../utils/tiers";
 import CustomFormContainer from "./CustomFormContainer";
 
+type Pkg = {
+  name: string;
+  key: string;
+  services: string[];
+  price: number;
+};
+
 const CustomPricing = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<Pkg | null>(null);
   const [services, setServices] = useState<string[]>([]);
   const [price, setPrice] = useState(0);
   const [prevValue, setPrevValue] = useState(0);
+
+  const [checkedServices, setCheckedServices] = useState<
+    Record<string, boolean>
+  >(services.reduce((acc, service) => ({ ...acc, [service]: false }), {}));
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const handleTier = () => {
+    if (price > 0) {
+      openModal();
+    } else {
+      toast.error("Válassz legalább egy szolgáltatást!");
+    }
+  };
 
   const updatePrice = (newPrice: number) => {
     setPrice((currentPrice) => currentPrice + newPrice);
@@ -48,86 +68,216 @@ const CustomPricing = () => {
             </p>
 
             <div className="mt-8 grid grid-cols-1 gap-20 text-sm leading-6 text-neutral-600 dark:text-neutral-200 sm:grid-cols-2 sm:gap-10">
-              {serviceCategories.map((category, index) => (
-                <div key={index} className="space-y-4">
-                  <h4 className="font-medium text-lg">{category.name}</h4>
-                  {category.services.map((service, serviceIndex) => (
-                    <div key={serviceIndex} className="flex items-center gap-3">
-                      {service.name === "Ülések mélytisztítása" ? (
-                        <select
-                          id={`service-${serviceIndex}`}
-                          name={service.name}
-                          className="select w-min bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700"
-                          onChange={(e) => {
-                            if (Number(e.target.value) !== prevValue) {
-                              const newValue = Number(e.target.value);
-                              const priceDifference =
-                                service.price * (newValue - prevValue);
-                              updatePrice(priceDifference);
-                              setPrevValue(newValue);
-
-                              setServices((prev) => {
-                                const newService = `Ülések mélytisztítása - ${e.target.value} db`;
-                                let found = false;
-                                const newServices = prev.map((service) => {
-                                  if (
-                                    service.startsWith("Ülések mélytisztítása")
-                                  ) {
-                                    found = true;
-                                    return newService;
-                                  }
-                                  return service;
-                                });
-                                if (!found) {
-                                  newServices.push(newService);
-                                }
-                                return newServices;
-                              });
-                            }
-                          }}
-                        >
-                          {[...Array(10)].map((_, i) => (
-                            <option key={i}>{i}</option>
-                          ))}
-                        </select>
-                      ) : (
+              <>
+                {tiers.map((tier) => (
+                  <div key={tier.name} className="space-y-4">
+                    <h3 className="text-2xl font-semibold">
+                      {tier.name} csomagok
+                    </h3>
+                    {tier.packages.map((pkg: Pkg) => (
+                      <div
+                        key={pkg.name}
+                        className={classNames({
+                          "flex items-center gap-3": true,
+                          "cursor-not-allowed":
+                            selectedPackage && selectedPackage.key !== pkg.key,
+                        })}
+                      >
                         <input
-                          id={service.name}
-                          name={service.name}
-                          value={service.name}
+                          id={pkg.key}
+                          name={pkg.key}
+                          value={pkg.key}
                           type="checkbox"
-                          className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)]"
+                          className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
+                          disabled={
+                            (selectedPackage &&
+                              selectedPackage.key !== pkg.key) ||
+                            false
+                          }
                           onChange={(e) => {
                             if (e.target.checked) {
-                              updatePrice(service.price);
+                              setServices([]);
+                              setPrice(0);
+
+                              setCheckedServices(
+                                services.reduce(
+                                  (acc, service) => ({
+                                    ...acc,
+                                    [service]: false,
+                                  }),
+                                  {}
+                                )
+                              );
+
+                              // const inputs = document.querySelectorAll(
+                              //   'input[aria-label="service"]'
+                              // );
+                              // inputs.forEach((input) => {
+                              //   (input as HTMLInputElement).checked = false;
+                              // });
+
+                              // const select = document.querySelector(
+                              //   'select[aria-label="service"]'
+                              // );
+                              // if (select) {
+                              //   (select as HTMLSelectElement).selectedIndex = 0;
+                              // }
+
+                              updatePrice(pkg.price);
                               setServices((prev) => [...prev, e.target.value]);
+                              setSelectedPackage(pkg);
                             } else {
-                              updatePrice(-service.price);
+                              updatePrice(-pkg.price);
                               setServices((prev) =>
                                 prev.filter(
                                   (service) => service !== e.target.value
                                 )
                               );
+                              setSelectedPackage(null);
                             }
                           }}
                         />
-                      )}
-                      <label
-                        htmlFor={service.name}
-                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                        <label
+                          htmlFor={pkg.key}
+                          className={classNames({
+                            "hover:opacity-80 transition-opacity cursor-pointer":
+                              !selectedPackage ||
+                              selectedPackage.key === pkg.key,
+                            "opacity-50 cursor-not-allowed":
+                              selectedPackage &&
+                              selectedPackage.key !== pkg.key,
+                          })}
+                        >
+                          {pkg.name} - {pkg.price.toLocaleString("de-DE")} Ft
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+
+                {serviceCategories.map((category, index) => (
+                  <div key={index} className="space-y-4">
+                    <h4 className="font-medium text-lg">{category.name}</h4>
+                    {category.services.map((service, serviceIndex) => (
+                      <div
+                        key={serviceIndex}
+                        className={classNames({
+                          "flex items-center gap-3": true,
+                          "cursor-not-allowed":
+                            selectedPackage &&
+                            selectedPackage.services.includes(service.name),
+                        })}
                       >
-                        {service.name === "Ülések mélytisztítása"
-                          ? `${service.name} - ${service.price.toLocaleString(
-                              "de-DE"
-                            )} Ft/db`
-                          : `${service.name} - ${service.price.toLocaleString(
-                              "de-DE"
-                            )} Ft`}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              ))}
+                        {service.name === "Ülések mélytisztítása" ? (
+                          <select
+                            id={`service-${serviceIndex}`}
+                            aria-label="service"
+                            name={service.name}
+                            className="select w-min bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
+                            disabled={
+                              (selectedPackage &&
+                                selectedPackage.services.includes(
+                                  service.name
+                                )) ||
+                              false
+                            }
+                            onChange={(e) => {
+                              if (Number(e.target.value) !== prevValue) {
+                                const newValue = Number(e.target.value);
+                                const priceDifference =
+                                  service.price * (newValue - prevValue);
+                                updatePrice(priceDifference);
+                                setPrevValue(newValue);
+
+                                setServices((prev) => {
+                                  const newService = `Ülések mélytisztítása - ${e.target.value} db`;
+                                  let found = false;
+                                  const newServices = prev.map((service) => {
+                                    if (
+                                      service.startsWith(
+                                        "Ülések mélytisztítása"
+                                      )
+                                    ) {
+                                      found = true;
+                                      return newService;
+                                    }
+                                    return service;
+                                  });
+                                  if (!found) {
+                                    newServices.push(newService);
+                                  }
+                                  return newServices;
+                                });
+                              }
+                            }}
+                          >
+                            {[...Array(10)].map((_, i) => (
+                              <option key={i}>{i}</option>
+                            ))}
+                          </select>
+                        ) : (
+                          <input
+                            id={service.name}
+                            name={service.name}
+                            value={service.name}
+                            type="checkbox"
+                            aria-label="service"
+                            checked={checkedServices[service.name] || false}
+                            className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
+                            disabled={
+                              (selectedPackage &&
+                                selectedPackage.services.includes(
+                                  service.name
+                                )) ||
+                              false
+                            }
+                            onChange={(e) => {
+                              setCheckedServices({
+                                ...checkedServices,
+                                [e.target.name]: e.target.checked,
+                              });
+
+                              if (e.target.checked) {
+                                updatePrice(service.price);
+                                setServices((prev) => [
+                                  ...prev,
+                                  e.target.value,
+                                ]);
+                              } else {
+                                updatePrice(-service.price);
+                                setServices((prev) =>
+                                  prev.filter(
+                                    (service) => service !== e.target.value
+                                  )
+                                );
+                              }
+                            }}
+                          />
+                        )}
+                        <label
+                          htmlFor={service.name}
+                          className={classNames({
+                            "hover:opacity-80 transition-opacity cursor-pointer":
+                              !selectedPackage ||
+                              !selectedPackage.services.includes(service.name),
+                            "opacity-50 cursor-not-allowed":
+                              selectedPackage &&
+                              selectedPackage.services.includes(service.name),
+                          })}
+                        >
+                          {service.name === "Ülések mélytisztítása"
+                            ? `${service.name} - ${service.price.toLocaleString(
+                                "de-DE"
+                              )} Ft/db`
+                            : `${service.name} - ${service.price.toLocaleString(
+                                "de-DE"
+                              )} Ft`}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </>
             </div>
           </div>
           <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
@@ -145,36 +295,67 @@ const CustomPricing = () => {
                   </span>
                 </p>
                 <button
-                  onClick={() => {
-                    if (price > 0) {
-                      openModal();
-                    } else {
-                      alert("Válassz legalább egy szolgáltatást!");
-                    }
-                  }}
+                  onClick={handleTier}
                   className="mt-10 block w-full rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   Csomag összerakása
                 </button>
-                <Modal
-                  isOpen={isModalOpen}
-                  onRequestClose={closeModal}
-                  contentLabel="Custom Tier Form"
-                  className="w-[80%] max-w-3xl bg-neutral-50 dark:bg-neutral-900 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-auto rounded-[10px] border-none outline-none p-10 sm:p-14"
-                  style={{
-                    overlay: {
-                      backgroundColor: "rgba(0, 0, 0, 0.4)",
+                <Toaster
+                  reverseOrder={true}
+                  gutter={16}
+                  toastOptions={{
+                    duration: 5000,
+                    style: {
+                      fontWeight: 500,
                     },
                   }}
-                >
-                  <CustomFormContainer price={price} services={services} />
-                  <button
-                    onClick={closeModal}
-                    className="absolute top-3 right-3 md:top-5 md:right-5"
+                />
+                <Transition appear show={isOpen} as={Fragment}>
+                  <Dialog
+                    as="div"
+                    className="relative z-10"
+                    onClose={closeModal}
                   >
-                    <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />
-                  </button>
-                </Modal>
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0"
+                      enterTo="opacity-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <div className="fixed inset-0 bg-black/25" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                      <div className="flex min-h-full items-center justify-center p-4 text-center">
+                        <Transition.Child
+                          as={Fragment}
+                          enter="ease-out duration-300"
+                          enterFrom="opacity-0 scale-95"
+                          enterTo="opacity-100 scale-100"
+                          leave="ease-in duration-200"
+                          leaveFrom="opacity-100 scale-100"
+                          leaveTo="opacity-0 scale-95"
+                        >
+                          <Dialog.Panel className="w-[80%] max-w-3xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
+                            <CustomFormContainer
+                              price={price}
+                              services={services}
+                            />
+                            <button
+                              onClick={closeModal}
+                              className="absolute top-3 right-3 md:top-5 md:right-5"
+                            >
+                              <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />
+                            </button>
+                          </Dialog.Panel>
+                        </Transition.Child>
+                      </div>
+                    </div>
+                  </Dialog>
+                </Transition>
               </div>
             </div>
           </div>

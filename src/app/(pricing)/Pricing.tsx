@@ -1,8 +1,37 @@
-import { CheckIcon } from "@heroicons/react/20/solid";
+"use client";
+
+import { Dialog, Transition } from "@headlessui/react";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import classNames from "classnames";
+import { Fragment, useState } from "react";
 import tiers from "../utils/tiers";
+import PricingFormContainer from "./PricingFormContainer";
+
+type Pkg = {
+  name: string;
+  price: number;
+  services: string[];
+};
 
 const Pricing = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPkg, setSelectedPkg] = useState({} as Pkg);
+  const [selectedTier, setSelectedTier] = useState("");
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const handleOpen = (pkg: Pkg, tierName: string) => {
+    setSelectedPkg(pkg);
+    setSelectedTier(tierName);
+    openModal();
+  };
+
   return (
     <div id="pricing" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-20">
@@ -33,9 +62,12 @@ const Pricing = () => {
                   >
                     <h4 className="font-semibold">{pkg.name}</h4>
                     <p className="text-3xl sm:text-4xl font-bold">
-                      {pkg.price}
+                      {pkg.price.toLocaleString("de-DE")} Ft
                     </p>
                     <button
+                      onClick={() => {
+                        handleOpen(pkg, tier.name);
+                      }}
                       className={classNames({
                         "bg-blue-500 hover:bg-blue-400 transition-colors text-neutral-50 py-2 px-4 rounded-md font-semibold text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600":
                           true,
@@ -78,6 +110,50 @@ const Pricing = () => {
             </div>
           ))}
         </div>
+        <Transition appear show={isOpen} as={Fragment}>
+          <Dialog as="div" className="relative z-10" onClose={closeModal}>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-black/25" />
+            </Transition.Child>
+
+            <div className="fixed inset-0 overflow-y-auto">
+              <div className="flex min-h-full items-center justify-center p-4 text-center">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                  <Dialog.Panel className="w-[80%] max-w-3xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
+                    <PricingFormContainer
+                      tierName={selectedTier}
+                      pkg={selectedPkg.name}
+                      price={selectedPkg.price}
+                      services={selectedPkg.services}
+                    />
+                    <button
+                      onClick={closeModal}
+                      className="absolute top-3 right-3 md:top-5 md:right-5"
+                    >
+                      <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />
+                    </button>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
+            </div>
+          </Dialog>
+        </Transition>
       </div>
     </div>
   );

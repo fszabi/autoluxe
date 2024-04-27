@@ -11,11 +11,11 @@ const serviceCategories = [
         price: 1500,
       },
       {
-        name: "Gumiszőnyg tisztítása",
+        name: "Lábtörlők tisztítása",
         price: 2000,
       },
       {
-        name: "Műanyagok tisztítása",
+        name: "Műanyagok tisztítása és ápolása",
         price: 2500,
       },
       {
@@ -23,24 +23,16 @@ const serviceCategories = [
         price: 4000,
       },
       {
-        name: "Csomagtér tisztítás",
+        name: "Csomagtér tisztítása",
         price: 5000,
-      },
-      {
-        name: "Illatosítás és szagtalanítás",
-        price: 1000,
       },
       {
         name: "Teljes szőnyegzet mélytisztítása",
         price: 5000,
       },
       {
-        name: "Ózontisztítás",
-        price: 5000,
-      },
-      {
-        name: "Kutyaszőr eltávolítás",
-        price: 3000,
+        name: "Illatosítás és szagtalanítás",
+        price: 1000,
       },
       {
         name: "Ülések mélytisztítása",
@@ -83,6 +75,10 @@ const serviceCategories = [
       {
         name: "Ózonos tisztítás",
         price: 5000,
+      },
+      {
+        name: "Kutyaszőr eltávolítás",
+        price: 3000,
       },
     ],
   },

@@ -4,8 +4,8 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ThemeSwitcher from "./ThemeSwitcher";
-import logo from "/public/assets/logo.png";
-import logo_dark from "/public/assets/logo_dark.png";
+import logo from "/public/assets/logo/logo.png";
+import logo_dark from "/public/assets/logo/logo_dark.png";
 
 const Nav = () => {
   const [mounted, setMounted] = useState(false);
