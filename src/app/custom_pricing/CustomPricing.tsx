@@ -3,11 +3,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import serviceCategories from "../utils/serviceCategories";
 import tiers from "../utils/tiers";
 import CustomFormContainer from "./CustomFormContainer";
+import { useTheme } from "next-themes";
 
 type Pkg = {
   name: string;
@@ -17,34 +18,65 @@ type Pkg = {
 };
 
 const CustomPricing = () => {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<Pkg | null>(null);
   const [services, setServices] = useState<string[]>([]);
   const [price, setPrice] = useState(0);
   const [prevValue, setPrevValue] = useState(0);
-
   const [checkedServices, setCheckedServices] = useState<
     Record<string, boolean>
   >(services.reduce((acc, service) => ({ ...acc, [service]: false }), {}));
 
-  function closeModal() {
-    setIsOpen(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
   }
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  const systemTheme =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
+  const themeToUse = theme === "system" ? systemTheme : theme;
+
+  const lightThemeToastStyle = {
+    fontWeight: 500,
+    background: "#f5f5f4",
+    color: "#171717",
+  };
+
+  const darkThemeToastStyle = {
+    fontWeight: 500,
+    background: "#262626",
+    color: "#fafafa",
+  };
 
   const handleTier = () => {
-    if (price > 0) {
+    if (services.length > 0) {
       openModal();
     } else {
       toast.error("Válassz legalább egy szolgáltatást!");
     }
+
+    console.log(services);
   };
 
   const updatePrice = (newPrice: number) => {
     setPrice((currentPrice) => currentPrice + newPrice);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
   };
 
   return (
@@ -305,9 +337,10 @@ const CustomPricing = () => {
                   gutter={16}
                   toastOptions={{
                     duration: 5000,
-                    style: {
-                      fontWeight: 500,
-                    },
+                    style:
+                      themeToUse === "light"
+                        ? lightThemeToastStyle
+                        : darkThemeToastStyle,
                   }}
                 />
                 <Transition appear show={isOpen} as={Fragment}>
