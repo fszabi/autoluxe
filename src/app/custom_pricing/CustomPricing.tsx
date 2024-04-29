@@ -132,11 +132,16 @@ const CustomPricing = () => {
             </button>
             {!showTiers && !showServices && (
               <div className="space-y-8">
-                <h3 className="text-xl font-semibold">
-                  Szeretné külső ésvagy belső csomagot választani előszőr, és
-                  hozzáadni plusz szolgáltatásokat, vagy teljesen a nulláról
-                  felépíteni egy csomagot?
-                </h3>
+                <div className="space-y-3">
+                  <p className="text-xl font-semibold">
+                    Személyreszabott csomag
+                  </p>
+                  <h3 className="font-medium">
+                    Szeretné külső ésvagy belső csomagot választani előszőr, és
+                    hozzáadni plusz szolgáltatásokat, vagy teljesen a nulláról
+                    felépíteni egy csomagot?
+                  </h3>
+                </div>
                 <div className="flex gap-5">
                   <button
                     onClick={() => setShowTiers(true)}
