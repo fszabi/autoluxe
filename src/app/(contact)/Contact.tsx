@@ -20,7 +20,7 @@ const Contact = () => {
           Kapcsolatfelvétel
         </h2>
         <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-          Vedd fel velünk a kapcsolatot
+          Kérdése van?
         </p>
       </div>
       <ContactForm />

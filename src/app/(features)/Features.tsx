@@ -16,7 +16,7 @@ const features = [
   {
     name: "Időtakarékosság",
     description:
-      "Amíg ön dolgozik, ügyeket intéz, sportol, addig mi gondoskodunk autója csillogásáról!",
+      "Amíg Ön dolgozik, ügyeket intéz, sportol, addig mi gondoskodunk autója csillogásáról!",
     icon: ClockIcon,
   },
   {
@@ -35,10 +35,10 @@ const Features2 = () => {
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">
               <h2 className="text-base font-semibold leading-7 text-blue-500">
-                Bízd ránk autódat!
+                Bízza ránk autóját!
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                Miért minket válassz?
+                Miért minket válasszon?
               </p>
               <p className="mt-6 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
                 Csapatunk arra törekszik, hogy a lehető legjobb minőségű

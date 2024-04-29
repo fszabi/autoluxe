@@ -1,9 +1,11 @@
 const tiers = [
   {
     name: "Belső tisztítás",
+    key: "belso",
     packages: [
       {
         name: "Alap csomag",
+        tier: "belso",
         key: "belso-alap",
         services: [
           "Porszívózás",
@@ -15,6 +17,7 @@ const tiers = [
       },
       {
         name: "Extra csomag",
+        tier: "belso",
         key: "belso-extra",
         services: [
           "Porszívózás",
@@ -30,6 +33,7 @@ const tiers = [
       },
       {
         name: "Prémium csomag",
+        tier: "belso",
         key: "belso-premium",
         services: [
           "Porszívózás",
@@ -49,15 +53,18 @@ const tiers = [
   },
   {
     name: "Külső mosás",
+    key: "kulso",
     packages: [
       {
         name: "Alap csomag",
+        tier: "kulso",
         key: "kulso-alap",
         services: ["Samponos mosás", "Bogároldás", "Ablakpucolás"],
         price: 6000,
       },
       {
         name: "Extra csomag",
+        tier: "kulso",
         key: "kulso-extra",
         services: [
           "Samponos mosás",
@@ -70,6 +77,7 @@ const tiers = [
       },
       {
         name: "Prémium csomag",
+        tier: "kulso",
         key: "kulso-premium",
         services: [
           "Samponos mosás",
