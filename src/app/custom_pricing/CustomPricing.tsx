@@ -10,6 +10,12 @@ import tiers from "../utils/tiers";
 import CustomFormContainer from "./CustomFormContainer";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
+type Tier = {
+  name: string;
+  key: string;
+  packages: Pkg[];
+};
+
 type Pkg = {
   name: string;
   tier: string;
@@ -18,10 +24,14 @@ type Pkg = {
   price: number;
 };
 
-type Tier = {
+type Service = {
   name: string;
-  key: string;
-  packages: Pkg[];
+  price: number;
+};
+
+type ServiceCategory = {
+  name: string;
+  services: Service[];
 };
 
 const CustomPricing = () => {
@@ -35,6 +45,9 @@ const CustomPricing = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [prevValue, setPrevValue] = useState(0);
   const [services, setServices] = useState<string[]>([]);
+  const [filteredServiceCategories, setFilteredServiceCategories] = useState<
+    ServiceCategory[]
+  >([]);
 
   useEffect(() => {
     setMounted(true);
@@ -43,6 +56,19 @@ const CustomPricing = () => {
   useEffect(() => {
     setTotalPrice(insidePrice + outsidePrice);
   }, [insidePrice, outsidePrice]);
+
+  useEffect(() => {
+    const initialFilteredServiceCategories = serviceCategories
+      .map((category: ServiceCategory) => ({
+        ...category,
+        services: category.services.filter(
+          (service) => !services.includes(service.name)
+        ),
+      }))
+      .filter((category) => category.services.length > 0);
+
+    setFilteredServiceCategories(initialFilteredServiceCategories);
+  }, [showServices]);
 
   if (!mounted) {
     return null;
@@ -82,26 +108,64 @@ const CustomPricing = () => {
   ) => {
     console.log(e.target.value);
 
-    if (tier.key === "belso") {
-      const selectedPkg = tier.packages.find(
-        (pkg) => pkg.key === e.target.value
-      );
-      if (selectedPkg) {
-        setInsidePrice(selectedPkg.price);
-      } else {
-        setInsidePrice(0);
-      }
-    }
+    const selectedPkg = tier.packages.find((pkg) => pkg.key === e.target.value);
 
-    if (tier.key === "kulso") {
-      const selectedPkg = tier.packages.find(
-        (pkg) => pkg.key === e.target.value
-      );
-      if (selectedPkg) {
+    if (selectedPkg) {
+      if (tier.key === "belso") {
+        setInsidePrice(selectedPkg.price);
+      } else if (tier.key === "kulso") {
         setOutsidePrice(selectedPkg.price);
-      } else {
+      }
+
+      const servicesWithoutCurrentTier = services.filter(
+        (service) =>
+          !tier.packages.some((pkg) => pkg.services.includes(service))
+      );
+
+      console.log(servicesWithoutCurrentTier);
+
+      setServices([...servicesWithoutCurrentTier, ...selectedPkg.services]);
+
+      console.log([...servicesWithoutCurrentTier, ...selectedPkg.services]);
+    } else {
+      if (tier.key === "belso") {
+        setInsidePrice(0);
+      } else if (tier.key === "kulso") {
         setOutsidePrice(0);
       }
+
+      const servicesWithoutCurrentTier = services.filter(
+        (service) =>
+          !tier.packages.some((pkg) => pkg.services.includes(service))
+      );
+
+      console.log(servicesWithoutCurrentTier);
+
+      setServices(servicesWithoutCurrentTier);
+
+      console.log(servicesWithoutCurrentTier);
+    }
+  };
+
+  const handleServiceChecked = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    service: Service
+  ) => {
+    if (e.target.checked) {
+      setTotalPrice(totalPrice + service.price);
+      // Add the service to the services array
+
+      setServices((prevServices) => [...prevServices, service.name]);
+
+      console.log(services);
+    } else {
+      setTotalPrice(totalPrice - service.price);
+      // Remove the service from the services array
+      setServices((prevServices) =>
+        prevServices.filter((s) => s !== service.name)
+      );
+
+      console.log(services);
     }
   };
 
@@ -112,6 +176,7 @@ const CustomPricing = () => {
     setOutsidePrice(0);
     setTotalPrice(0);
     setPrevValue(0);
+    setServices([]);
   };
 
   return (
@@ -198,7 +263,7 @@ const CustomPricing = () => {
             {showServices && (
               <div className="grid grid-cols-1 gap-20 text-sm leading-6 text-neutral-600 dark:text-neutral-200 sm:grid-cols-2 sm:gap-8">
                 <>
-                  {serviceCategories.map((category, index) => (
+                  {filteredServiceCategories.map((category, index) => (
                     <div key={index} className="space-y-4">
                       <h4 className="text-xl font-semibold">{category.name}</h4>
                       {category.services.map((service, serviceIndex) => (
@@ -231,11 +296,7 @@ const CustomPricing = () => {
                               value={service.name}
                               type="checkbox"
                               onChange={(e) => {
-                                if (e.target.checked) {
-                                  setTotalPrice(totalPrice + service.price);
-                                } else {
-                                  setTotalPrice(totalPrice - service.price);
-                                }
+                                handleServiceChecked(e, service);
                               }}
                               className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
                             />
