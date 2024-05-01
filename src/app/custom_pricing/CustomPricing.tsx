@@ -7,7 +7,7 @@ import { Fragment, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import serviceCategories from "../utils/serviceCategories";
 import tiers from "../utils/tiers";
-import CustomFormContainer from "./CustomFormContainer";
+import CustomForm from "./CustomForm";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 type Tier = {
@@ -94,11 +94,11 @@ const CustomPricing = () => {
     color: "#fafafa",
   };
 
-  const closeModal = () => {
+  const closeFormModal = () => {
     setIsOpen(false);
   };
 
-  const openModal = () => {
+  const openFormModal = () => {
     setIsOpen(true);
   };
 
@@ -356,7 +356,7 @@ const CustomPricing = () => {
                     if (totalPrice === 0) {
                       toast.error("Az összeg nem lehet 0 Ft!");
                     } else {
-                      openModal();
+                      openFormModal();
                     }
                   }}
                   className="mt-10 block w-full rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -378,7 +378,7 @@ const CustomPricing = () => {
                   <Dialog
                     as="div"
                     className="relative z-10"
-                    onClose={closeModal}
+                    onClose={closeFormModal}
                   >
                     <Transition.Child
                       as={Fragment}
@@ -404,12 +404,13 @@ const CustomPricing = () => {
                           leaveTo="opacity-0 scale-95"
                         >
                           <Dialog.Panel className="w-[80%] max-w-3xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
-                            <CustomFormContainer
+                            <CustomForm
                               price={totalPrice}
                               services={services}
+                              closeFormModal={closeFormModal}
                             />
                             <button
-                              onClick={closeModal}
+                              onClick={closeFormModal}
                               className="absolute top-3 right-3 md:top-5 md:right-5"
                             >
                               <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />
