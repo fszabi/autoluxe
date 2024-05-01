@@ -102,7 +102,7 @@ const CustomPricing = () => {
     setIsOpen(true);
   };
 
-  const handlePackageSelected = (
+  const handlePackageSelect = (
     e: React.ChangeEvent<HTMLSelectElement>,
     tier: Tier
   ) => {
@@ -147,7 +147,7 @@ const CustomPricing = () => {
     }
   };
 
-  const handleServiceChecked = (
+  const handleServiceCheck = (
     e: React.ChangeEvent<HTMLInputElement>,
     service: Service
   ) => {
@@ -164,6 +164,26 @@ const CustomPricing = () => {
       setServices((prevServices) =>
         prevServices.filter((s) => s !== service.name)
       );
+
+      console.log(services);
+    }
+  };
+
+  const handleServiceSelect = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    service: Service
+  ) => {
+    const newValue = parseInt(e.target.value);
+    const priceDifference = newValue - prevValue;
+    setTotalPrice(totalPrice + priceDifference * service.price);
+    setPrevValue(newValue);
+
+    if (services.includes(service.name)) {
+      setServices(services.filter((s) => s !== service.name));
+
+      console.log(services);
+    } else {
+      setServices([...services, service.name]);
 
       console.log(services);
     }
@@ -233,7 +253,7 @@ const CustomPricing = () => {
                     <select
                       className="select w-min bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
                       onChange={(e) => {
-                        handlePackageSelected(e, tier);
+                        handlePackageSelect(e, tier);
                       }}
                     >
                       <option value="">-</option>
@@ -276,12 +296,7 @@ const CustomPricing = () => {
                               id={service.name}
                               name={service.name}
                               onChange={(e) => {
-                                const newValue = parseInt(e.target.value);
-                                const priceDifference = newValue - prevValue;
-                                setTotalPrice(
-                                  totalPrice + priceDifference * service.price
-                                );
-                                setPrevValue(newValue);
+                                handleServiceSelect(e, service);
                               }}
                               className="select w-min bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
                             >
@@ -296,7 +311,7 @@ const CustomPricing = () => {
                               value={service.name}
                               type="checkbox"
                               onChange={(e) => {
-                                handleServiceChecked(e, service);
+                                handleServiceCheck(e, service);
                               }}
                               className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
                             />
