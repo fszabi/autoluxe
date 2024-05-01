@@ -7,27 +7,26 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 interface Props {
   price: number;
   services: string[];
-  closeFormModal: () => void;
 }
 
-const CustomForm = ({ price, services, closeFormModal }: Props) => {
+const CustomForm = ({ price, services }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [state, handleSubmit] = useForm(
     process.env.NEXT_PUBLIC_CUSTOM_PRICING_FORM!
   );
 
-  const closeSuccessModal = () => {
+  if (state.succeeded) {
+    openModal();
+    // return <p>Thanks for your submission!</p>;
+  }
+
+  const closeModal = () => {
     setIsOpen(false);
   };
 
-  const openSuccessModal = () => {
+  const openModal = () => {
     setIsOpen(true);
   };
-
-  if (state.succeeded) {
-    closeFormModal();
-    openSuccessModal();
-  }
 
   return (
     <>
@@ -159,7 +158,7 @@ const CustomForm = ({ price, services, closeFormModal }: Props) => {
         </form>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeSuccessModal}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -187,7 +186,7 @@ const CustomForm = ({ price, services, closeFormModal }: Props) => {
                   Köszönjük rendelését! Hamarosan felvesszük Önnel a
                   kapcsolatot.
                   <button
-                    onClick={closeSuccessModal}
+                    onClick={closeModal}
                     className="absolute top-3 right-3 md:top-5 md:right-5"
                   >
                     <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />

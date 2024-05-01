@@ -1,14 +1,13 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useTheme } from "next-themes";
 import { Fragment, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import serviceCategories from "../utils/serviceCategories";
 import tiers from "../utils/tiers";
 import CustomForm from "./CustomForm";
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 type Tier = {
   name: string;
@@ -94,11 +93,11 @@ const CustomPricing = () => {
     color: "#fafafa",
   };
 
-  const closeFormModal = () => {
+  const closeModal = () => {
     setIsOpen(false);
   };
 
-  const openFormModal = () => {
+  const openModal = () => {
     setIsOpen(true);
   };
 
@@ -356,7 +355,7 @@ const CustomPricing = () => {
                     if (totalPrice === 0) {
                       toast.error("Az összeg nem lehet 0 Ft!");
                     } else {
-                      openFormModal();
+                      openModal();
                     }
                   }}
                   className="mt-10 block w-full rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -378,7 +377,7 @@ const CustomPricing = () => {
                   <Dialog
                     as="div"
                     className="relative z-10"
-                    onClose={closeFormModal}
+                    onClose={closeModal}
                   >
                     <Transition.Child
                       as={Fragment}
@@ -407,10 +406,9 @@ const CustomPricing = () => {
                             <CustomForm
                               price={totalPrice}
                               services={services}
-                              closeFormModal={closeFormModal}
                             />
                             <button
-                              onClick={closeFormModal}
+                              onClick={closeModal}
                               className="absolute top-3 right-3 md:top-5 md:right-5"
                             >
                               <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />
