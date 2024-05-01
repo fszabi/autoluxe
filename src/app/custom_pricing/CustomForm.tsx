@@ -25,7 +25,7 @@ const CustomForm = ({ price, services }: Props) => {
 
   if (state.succeeded) {
     openModal();
-    // return <p>Thanks for your submission!</p>;
+    return <p>Thanks for your submission!</p>;
   }
 
   return (
