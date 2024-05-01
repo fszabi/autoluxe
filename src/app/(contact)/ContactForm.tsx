@@ -1,5 +1,3 @@
-import SwitchComponent from "../components/SwitchComponent";
-
 const ContactForm = () => {
   return (
     <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
@@ -89,7 +87,7 @@ const ContactForm = () => {
             />
           </div>
         </div>
-        <SwitchComponent />
+        {/* <SwitchComponent /> */}
       </div>
       <div className="mt-10">
         <button

@@ -270,7 +270,9 @@ const CustomPricing = () => {
                       setShowTiers(false);
                       setShowServices(true);
                     } else {
-                      toast.error("Válasszon csomagot!");
+                      toast.error("Válasszon csomagot!", {
+                        id: "no-package",
+                      });
                     }
                   }}
                   className="block w-fit rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -352,10 +354,12 @@ const CustomPricing = () => {
                 </p>
                 <button
                   onClick={() => {
-                    if (totalPrice === 0) {
-                      toast.error("Az összeg nem lehet 0 Ft!");
-                    } else {
+                    if (totalPrice > 0) {
                       openModal();
+                    } else {
+                      toast.error("Az összeg nem lehet 0 Ft!", {
+                        id: "no-total-price",
+                      });
                     }
                   }}
                   className="mt-10 block w-full rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"

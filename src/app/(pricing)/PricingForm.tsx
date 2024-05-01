@@ -1,5 +1,3 @@
-import SwitchComponent from "../components/SwitchComponent";
-
 interface Props {
   price: number;
   services: string[];
@@ -96,7 +94,7 @@ const PricingForm = ({ price, services }: Props) => {
             />
           </div>
         </div>
-        <SwitchComponent />
+        {/* <SwitchComponent /> */}
       </div>
       <div className="mt-10">
         <button
