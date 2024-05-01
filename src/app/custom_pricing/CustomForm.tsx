@@ -15,11 +15,6 @@ const CustomForm = ({ price, services }: Props) => {
     process.env.NEXT_PUBLIC_CUSTOM_PRICING_FORM!
   );
 
-  if (state.succeeded) {
-    openModal();
-    // return <p>Thanks for your submission!</p>;
-  }
-
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -27,6 +22,11 @@ const CustomForm = ({ price, services }: Props) => {
   const openModal = () => {
     setIsOpen(true);
   };
+
+  if (state.succeeded) {
+    openModal();
+    // return <p>Thanks for your submission!</p>;
+  }
 
   return (
     <>
