@@ -1,3 +1,4 @@
+import { useForm, ValidationError } from "@formspree/react";
 import SwitchComponent from "../components/SwitchComponent";
 
 interface Props {
@@ -6,8 +7,16 @@ interface Props {
 }
 
 const CustomForm = ({ price, services }: Props) => {
+  const [state, handleSubmit] = useForm(
+    process.env.NEXT_PUBLIC_CUSTOM_PRICING_FORM!
+  );
+
+  if (state.succeeded) {
+    return <p>Thanks for your submission!</p>;
+  }
+
   return (
-    <form action="#" method="POST" className="space-y-10">
+    <form onSubmit={handleSubmit} className="space-y-10">
       <input type="hidden" name="price" value={price} />
       <input type="hidden" name="services" value={JSON.stringify(services)} />
       <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -61,6 +70,7 @@ const CustomForm = ({ price, services }: Props) => {
               className="block w-full rounded-md border-0 px-3.5 py-2 shadow-sm bg-neutral-50 dark:bg-neutral-900 ring-1 ring-inset ring-neutral-300 dark:ring-neutral-700 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
             />
           </div>
+          <ValidationError prefix="Email" field="email" errors={state.errors} />
         </div>
         <div className="sm:col-span-2">
           <label
@@ -95,17 +105,24 @@ const CustomForm = ({ price, services }: Props) => {
               defaultValue={""}
             />
           </div>
+          <ValidationError
+            prefix="Message"
+            field="message"
+            errors={state.errors}
+          />
         </div>
         <SwitchComponent />
       </div>
       <div className="mt-10">
         <button
           type="submit"
+          disabled={state.submitting}
           className="block w-full rounded-md bg-blue-500 px-3.5 py-2.5 text-center text-sm font-semibold text-neutral-50 shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
           Küldés
         </button>
       </div>
+      <ValidationError errors={state.errors} />
     </form>
   );
 };
