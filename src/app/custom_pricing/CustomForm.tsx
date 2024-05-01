@@ -25,7 +25,9 @@ const CustomForm = ({ price, services }: Props) => {
 
   if (state.succeeded) {
     openModal();
-    return <p>Thanks for your submission!</p>;
+    return (
+      <p>Köszönjük rendelését! Hamarosan felvesszük Önnel a kapcsolatot.</p>
+    );
   }
 
   return (
