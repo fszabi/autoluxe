@@ -23,18 +23,18 @@ const Hero = () => {
         </div>
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Unod már az autó takarítást?
+            Unja már autója takarítását?
           </h1>
           <p className="mt-6 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
-            Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról,
-            ránk számíthatsz!
+            Legyen szó autója külsejének mosásáról vagy belsejének
+            tisztításáról, ránk számíthat!
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
               href="#pricing"
               className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-neutral-50 shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
             >
-              Vágj bele
+              Érdekel
             </Link>
           </div>
         </div>

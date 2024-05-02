@@ -190,9 +190,9 @@ const CustomPricing = () => {
                     Személyreszabott csomag
                   </p>
                   <h3 className="font-medium">
-                    Szeretné külső ésvagy belső csomagot választani előszőr, és
-                    hozzáadni plusz szolgáltatásokat, vagy teljesen a nulláról
-                    felépíteni egy csomagot?
+                    Itt lehetősége van egy kiválasztott csomaghoz plusz
+                    szolgáltatásokat kérni, illetve teljesen a saját autójára is
+                    szabhatja!
                   </h3>
                 </div>
                 <div className="flex flex-wrap gap-5">
@@ -200,13 +200,13 @@ const CustomPricing = () => {
                     onClick={() => setShowTiers(true)}
                     className="block w-fit rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                   >
-                    Választok először
+                    Először csomagot választok
                   </button>
                   <button
                     onClick={() => setShowServices(true)}
                     className="block w-fit rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                   >
-                    Nulláról építem fel
+                    Teljesen az autómra szabom
                   </button>
                 </div>
               </div>
@@ -235,7 +235,7 @@ const CustomPricing = () => {
                 ))}
                 <button
                   onClick={() => {
-                    if (totalPrice > 0) {
+                    if (services.length > 0) {
                       setShowTiers(false);
                       setShowServices(true);
                     } else {
@@ -336,7 +336,7 @@ const CustomPricing = () => {
                   }}
                   className="mt-10 block w-full rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
-                  Csomag összerakása
+                  Időpont foglalás
                 </button>
                 <Transition appear show={isOpen} as={Fragment}>
                   <Dialog

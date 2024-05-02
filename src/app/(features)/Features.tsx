@@ -65,7 +65,7 @@ const Features2 = () => {
           <Image
             src={car}
             alt="Product screenshot"
-            className="w-full h-full object-cover rounded-xl shadow-xl lg:w-[50rem]"
+            className="w-full h-full object-cover rounded-xl shadow-xl"
           />
         </div>
       </div>

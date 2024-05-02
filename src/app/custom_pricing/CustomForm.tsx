@@ -11,7 +11,9 @@ interface Props {
 }
 
 const CustomForm = ({ price, services }: Props) => {
-  const [state, handleSubmit] = useForm("mvoelrzp");
+  const [state, handleSubmit] = useForm(
+    process.env.NEXT_PUBLIC_CUSTOM_PRICING_FORM!
+  );
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
@@ -19,7 +21,7 @@ const CustomForm = ({ price, services }: Props) => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!agreed) {
       toast.error("Az adatvédelmi nyilatkozatot el kell fogadnia!", {
-        id: "no-agreement",
+        id: "no-agreement-custom-pricing",
       });
       e.preventDefault();
       return;
@@ -61,7 +63,7 @@ const CustomForm = ({ price, services }: Props) => {
     return (
       <div className="text-center space-y-3">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Köszönjük rendelését!
+          Köszönjük bizalmát!
         </h2>
         <p className="text-lg font-medium">
           Hamarosan felvesszük Önnel a kapcsolatot.
@@ -73,10 +75,10 @@ const CustomForm = ({ price, services }: Props) => {
   return (
     <div className="space-y-10">
       <div className="p-5 sm:p-10 rounded-3xl border border-neutral-200 dark:border-neutral-800 space-y-5">
-        <h4 className="font-semibold max-[350px]:text-sm">
+        <h4 className="font-semibold max-[360px]:text-sm">
           Személyreszabott csomag
         </h4>
-        <p className="max-[350px]:text-2xl text-3xl sm:text-4xl font-bold">
+        <p className="max-[360px]:text-2xl text-3xl sm:text-4xl font-bold">
           {price.toLocaleString("de-DE")} Ft
         </p>
       </div>

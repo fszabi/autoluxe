@@ -5,18 +5,22 @@ import { CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import classNames from "classnames";
 import { Fragment, useState } from "react";
 import tiers from "../utils/tiers";
-import PricingFormContainer from "./PricingFormContainer";
+import PricingForm from "./PricingForm";
 
 type Pkg = {
   name: string;
-  price: number;
+  tier: string;
+  key: string;
   services: string[];
+  price: number;
 };
 
 const Pricing = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedPkg, setSelectedPkg] = useState({} as Pkg);
-  const [selectedTier, setSelectedTier] = useState("");
+  const [pkgName, setPkgName] = useState("");
+  const [tierName, setTierName] = useState("");
+  const [pkgServices, setPkgServices] = useState<string[]>([]);
+  const [pkgPrice, setPkgPrice] = useState(0);
 
   function closeModal() {
     setIsOpen(false);
@@ -27,8 +31,10 @@ const Pricing = () => {
   }
 
   const handleOpen = (pkg: Pkg, tierName: string) => {
-    setSelectedPkg(pkg);
-    setSelectedTier(tierName);
+    setPkgName(pkg.name);
+    setTierName(tierName);
+    setPkgPrice(pkg.price);
+    setPkgServices(pkg.services);
     openModal();
   };
 
@@ -136,11 +142,11 @@ const Pricing = () => {
                   leaveTo="opacity-0 scale-95"
                 >
                   <Dialog.Panel className="w-[80%] max-w-3xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
-                    <PricingFormContainer
-                      tierName={selectedTier}
-                      pkg={selectedPkg.name}
-                      price={selectedPkg.price}
-                      services={selectedPkg.services}
+                    <PricingForm
+                      tierName={tierName}
+                      pkgName={pkgName}
+                      pkgPrice={pkgPrice}
+                      pkgServices={pkgServices}
                     />
                     <button
                       onClick={closeModal}
