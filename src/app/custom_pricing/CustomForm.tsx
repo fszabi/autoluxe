@@ -1,10 +1,9 @@
 import { useForm, ValidationError } from "@formspree/react";
-import { useEffect, useRef, useState } from "react";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
-import { useTheme } from "next-themes";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   price: number;
@@ -12,46 +11,16 @@ interface Props {
 }
 
 const CustomForm = ({ price, services }: Props) => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
   const [state, handleSubmit] = useForm("mvoelrzp");
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  const systemTheme =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-
-  const themeToUse = theme === "system" ? systemTheme : theme;
-
-  const lightThemeToastStyle = {
-    fontWeight: 500,
-    background: "#f5f5f4",
-    color: "#171717",
-  };
-
-  const darkThemeToastStyle = {
-    fontWeight: 500,
-    background: "#262626",
-    color: "#fafafa",
-  };
-
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!agreed) {
-      // toast.error("Az adatvédelmi nyilatkozatot el kell fogadnia!", {
-      //   id: "no-agreement",
-      // });
+      toast.error("Az adatvédelmi nyilatkozatot el kell fogadnia!", {
+        id: "no-agreement",
+      });
       e.preventDefault();
       return;
     }
@@ -252,17 +221,6 @@ const CustomForm = ({ price, services }: Props) => {
               .
             </Switch.Label>
           </Switch.Group>
-          <Toaster
-            reverseOrder={true}
-            gutter={16}
-            toastOptions={{
-              duration: 5000,
-              style:
-                themeToUse === "light"
-                  ? lightThemeToastStyle
-                  : darkThemeToastStyle,
-            }}
-          />
         </div>
         <div className="mt-10">
           <button

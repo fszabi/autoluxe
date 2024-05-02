@@ -2,9 +2,8 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowPathIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { useTheme } from "next-themes";
 import { Fragment, useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import serviceCategories from "../utils/serviceCategories";
 import tiers from "../utils/tiers";
 import CustomForm from "./CustomForm";
@@ -34,8 +33,6 @@ type ServiceCategory = {
 };
 
 const CustomPricing = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [showTiers, setShowTiers] = useState(false);
   const [showServices, setShowServices] = useState(false);
@@ -47,10 +44,6 @@ const CustomPricing = () => {
   const [filteredServiceCategories, setFilteredServiceCategories] = useState<
     ServiceCategory[]
   >([]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     setTotalPrice(insidePrice + outsidePrice);
@@ -68,30 +61,6 @@ const CustomPricing = () => {
 
     setFilteredServiceCategories(initialFilteredServiceCategories);
   }, [showServices]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  const systemTheme =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-
-  const themeToUse = theme === "system" ? systemTheme : theme;
-
-  const lightThemeToastStyle = {
-    fontWeight: 500,
-    background: "#f5f5f4",
-    color: "#171717",
-  };
-
-  const darkThemeToastStyle = {
-    fontWeight: 500,
-    background: "#262626",
-    color: "#fafafa",
-  };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -211,8 +180,8 @@ const CustomPricing = () => {
         </div>
         <div className="mx-auto mt-16 max-w-2xl rounded-3xl border border-neutral-200 dark:border-neutral-800 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
           <div className="relative p-8 sm:p-10 lg:flex-auto">
-            <button className="absolute top-5 right-5" onClick={resetStates}>
-              <ArrowPathIcon className="w-6 h-6 shrink-0" />
+            <button className="absolute top-3 right-3" onClick={resetStates}>
+              <ArrowPathIcon className="w-5 h-5 sm:h-6 sm:w-6 shrink-0" />
             </button>
             {!showTiers && !showServices && (
               <div className="space-y-8">
@@ -226,7 +195,7 @@ const CustomPricing = () => {
                     felépíteni egy csomagot?
                   </h3>
                 </div>
-                <div className="flex gap-5">
+                <div className="flex flex-wrap gap-5">
                   <button
                     onClick={() => setShowTiers(true)}
                     className="block w-fit rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -243,14 +212,14 @@ const CustomPricing = () => {
               </div>
             )}
             {showTiers && (
-              <div className="grid grid-cols-1 gap-20 text-sm leading-6 text-neutral-600 dark:text-neutral-200 sm:grid-cols-2 sm:gap-8">
+              <div className="grid grid-cols-1 gap-10 text-sm leading-6 text-neutral-600 dark:text-neutral-200 sm:grid-cols-2">
                 {tiers.map((tier) => (
                   <div key={tier.name} className="space-y-4">
                     <h3 className="text-xl font-semibold">
                       {tier.name} csomagok
                     </h3>
                     <select
-                      className="select w-min bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
+                      className="select w-full bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
                       onChange={(e) => {
                         handlePackageSelect(e, tier);
                       }}
@@ -282,7 +251,7 @@ const CustomPricing = () => {
               </div>
             )}
             {showServices && (
-              <div className="grid grid-cols-1 gap-20 text-sm leading-6 text-neutral-600 dark:text-neutral-200 sm:grid-cols-2 sm:gap-8">
+              <div className="grid grid-cols-1 gap-10 text-sm leading-6 text-neutral-600 dark:text-neutral-200 sm:grid-cols-2">
                 <>
                   {filteredServiceCategories.map((category, index) => (
                     <div key={index} className="space-y-4">
@@ -354,29 +323,21 @@ const CustomPricing = () => {
                 </p>
                 <button
                   onClick={() => {
-                    if (totalPrice > 0) {
+                    if (totalPrice >= 5000) {
                       openModal();
                     } else {
-                      toast.error("Az összeg nem lehet 0 Ft!", {
-                        id: "no-total-price",
-                      });
+                      toast.error(
+                        "Az összeg nem lehet kevesebb, mint 5.000 Ft!",
+                        {
+                          id: "no-total-price",
+                        }
+                      );
                     }
                   }}
                   className="mt-10 block w-full rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   Csomag összerakása
                 </button>
-                <Toaster
-                  reverseOrder={true}
-                  gutter={16}
-                  toastOptions={{
-                    duration: 5000,
-                    style:
-                      themeToUse === "light"
-                        ? lightThemeToastStyle
-                        : darkThemeToastStyle,
-                  }}
-                />
                 <Transition appear show={isOpen} as={Fragment}>
                   <Dialog
                     as="div"

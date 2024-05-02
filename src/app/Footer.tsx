@@ -94,7 +94,7 @@ const Footer = () => {
               href="https://webrebirth.hu/"
               target="_blank"
             >
-              <Image height={50} src={webrebirth_logo} alt="webrebirth logo" />
+              <Image height={35} src={webrebirth_logo} alt="webrebirth logo" />
             </Link>
           </div>
         </div>

@@ -43,7 +43,7 @@ const Nav = () => {
           <Image
             className="h-14 w-auto"
             src={logo_dark}
-            alt="gosi és kertész services logo 2"
+            alt="gosi és kertész services logo dark"
           />
         )}
       </div>
