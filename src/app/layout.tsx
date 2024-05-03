@@ -57,18 +57,18 @@ export default function RootLayout({
       >
         <ThemeProvider defaultTheme="system" attribute="class">
           {children}
+          <Script
+            defer
+            src="https://eu.umami.is/script.js"
+            data-website-id="0af0b7bb-b796-4564-8dd6-99d49831ae38"
+          />
+          <Script
+            defer
+            src="https://unpkg.com/@tinybirdco/flock.js"
+            data-host="https://api.tinybird.co"
+            data-token="p.eyJ1IjogIjkxOTFhNzJjLTE4ZjQtNGU0Yy1hZTc0LTU0NzI1Yzg0NWU0NSIsICJpZCI6ICI1YWE4ODQxMi1kZGQ5LTQwYmQtOGI2ZS0xNjdhOGU2NmJjZTIiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.UcSPtKTPtA6dLw9zc4bnr1CYjXX3E89JjHWzwXMVZaU"
+          />
         </ThemeProvider>
-        <Script
-          defer
-          src="https://eu.umami.is/script.js"
-          data-website-id="0af0b7bb-b796-4564-8dd6-99d49831ae38"
-        />
-        <Script
-          defer
-          src="https://unpkg.com/@tinybirdco/flock.js"
-          data-host="https://api.tinybird.co"
-          data-token="p.eyJ1IjogIjkxOTFhNzJjLTE4ZjQtNGU0Yy1hZTc0LTU0NzI1Yzg0NWU0NSIsICJpZCI6ICI1YWE4ODQxMi1kZGQ5LTQwYmQtOGI2ZS0xNjdhOGU2NmJjZTIiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.UcSPtKTPtA6dLw9zc4bnr1CYjXX3E89JjHWzwXMVZaU"
-        />
       </body>
     </html>
   );
