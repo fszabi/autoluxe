@@ -18,15 +18,15 @@ const CustomForm = ({ price, services }: Props) => {
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
   const [finalPrice, setFinalPrice] = useState(price);
-  const [discount, setDiscount] = useState(false);
+  const [extraCharge, setExtraCharge] = useState(false);
   const [isTenPercentChecked, setIsTenPercentChecked] = useState(false);
   const [isTwentyPercentChecked, setIsTwentyPercentChecked] = useState(false);
 
   const handleTenPercentDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsTenPercentChecked(e.target.checked);
-    setDiscount(!discount);
-    if (!discount) {
-      setFinalPrice(price * 0.9);
+    setExtraCharge(!extraCharge);
+    if (!extraCharge) {
+      setFinalPrice(price * 1.1);
     } else {
       setFinalPrice(price);
     }
@@ -36,9 +36,9 @@ const CustomForm = ({ price, services }: Props) => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setIsTwentyPercentChecked(e.target.checked);
-    setDiscount(!discount);
-    if (!discount) {
-      setFinalPrice(price * 0.8);
+    setExtraCharge(!extraCharge);
+    if (!extraCharge) {
+      setFinalPrice(price * 1.2);
     } else {
       setFinalPrice(price);
     }
@@ -113,31 +113,31 @@ const CustomForm = ({ price, services }: Props) => {
         <input type="hidden" name="services" value={JSON.stringify(services)} />
         <div className="space-y-6">
           <p>
-            7 személyes autóknál 10%, 9 személyes autóknál pedig 20% kedvezmény
-            igényelhető!
+            7 személyes autóknál 10%, 9 személyes autóknál pedig 20% felárat
+            számolunk!
           </p>
           <div className="space-y-4">
             <div className="flex gap-3 items-center">
               <input
                 type="checkbox"
-                id="discount-10"
-                name="discount-10"
+                id="felar-10-szazalek"
+                name="felar-10-szazalek"
                 onChange={handleTenPercentDiscount}
                 disabled={isTwentyPercentChecked}
                 className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
               />
-              <label htmlFor="discount-10">7 személyes - 10%</label>
+              <label htmlFor="felar-10-szazalek">7 személyes autóm van</label>
             </div>
             <div className="flex gap-3 items-center">
               <input
                 type="checkbox"
-                id="discount-20"
-                name="discount-20"
+                id="felar-20-szazalek"
+                name="felar-20-szazalek"
                 onChange={handleTwentyPercentDiscount}
                 disabled={isTenPercentChecked}
                 className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
               />
-              <label htmlFor="discount-20">9 személyes - 20%</label>
+              <label htmlFor="felar-20-szazalek">9 személyes autóm van</label>
             </div>
           </div>
         </div>

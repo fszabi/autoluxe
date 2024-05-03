@@ -74,8 +74,6 @@ const CustomPricing = () => {
     e: React.ChangeEvent<HTMLSelectElement>,
     tier: Tier
   ) => {
-    console.log(e.target.value);
-
     const selectedPkg = tier.packages.find((pkg) => pkg.key === e.target.value);
 
     if (selectedPkg) {
@@ -90,11 +88,7 @@ const CustomPricing = () => {
           !tier.packages.some((pkg) => pkg.services.includes(service))
       );
 
-      console.log(servicesWithoutCurrentTier);
-
       setServices([...servicesWithoutCurrentTier, ...selectedPkg.services]);
-
-      console.log([...servicesWithoutCurrentTier, ...selectedPkg.services]);
     } else {
       if (tier.key === "belso") {
         setInsidePrice(0);
@@ -107,11 +101,7 @@ const CustomPricing = () => {
           !tier.packages.some((pkg) => pkg.services.includes(service))
       );
 
-      console.log(servicesWithoutCurrentTier);
-
       setServices(servicesWithoutCurrentTier);
-
-      console.log(servicesWithoutCurrentTier);
     }
   };
 
@@ -124,16 +114,12 @@ const CustomPricing = () => {
       // Add the service to the services array
 
       setServices((prevServices) => [...prevServices, service.name]);
-
-      console.log(services);
     } else {
       setTotalPrice(totalPrice - service.price);
       // Remove the service from the services array
       setServices((prevServices) =>
         prevServices.filter((s) => s !== service.name)
       );
-
-      console.log(services);
     }
   };
 
@@ -148,12 +134,8 @@ const CustomPricing = () => {
 
     if (services.includes(service.name)) {
       setServices(services.filter((s) => s !== service.name));
-
-      console.log(services);
     } else {
       setServices([...services, service.name]);
-
-      console.log(services);
     }
   };
 
