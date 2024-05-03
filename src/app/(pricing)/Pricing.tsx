@@ -31,8 +31,8 @@ const Pricing = () => {
   }
 
   const handleOpen = (pkg: Pkg, tierName: string) => {
-    setPkgName(pkg.name);
     setTierName(tierName);
+    setPkgName(pkg.name);
     setPkgPrice(pkg.price);
     setPkgServices(pkg.services);
     openModal();

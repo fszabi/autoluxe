@@ -108,6 +108,8 @@ const PricingForm = ({ tierName, pkgName, pkgPrice, pkgServices }: Props) => {
         </p>
       </div>
       <form onSubmit={handleFormSubmit} className="space-y-10">
+        <input type="hidden" name="tier" value={tierName} />
+        <input type="hidden" name="package" value={pkgName} />
         <input type="hidden" name="price" value={finalPrice} />
         <input
           type="hidden"
