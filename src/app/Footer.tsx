@@ -5,8 +5,8 @@ import webrebirth_logo from "/public/assets/logo/webrebirth_logo.png";
 
 const navigation = {
   main: [
-    { name: "ÁSZF", href: "#" },
-    { name: "Adatvédelmi tájékoztató", href: "#" },
+    { name: "ÁSZF", href: "/assets/docs/aszf.docx" },
+    { name: "Adatvédelmi tájékoztató", href: "/assets/docs/adatvedelmi.docx" },
   ],
   contacts: [
     {
@@ -50,6 +50,7 @@ const Footer = () => {
             <Link
               key={item.name}
               href={item.href}
+              target="_blank"
               className="hover:opacity-70 transition-opacity"
             >
               {item.name}

@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import "animate.css";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
@@ -57,6 +58,11 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" attribute="class">
           {children}
         </ThemeProvider>
+        <Script
+          src="https://eu.umami.is/script.js"
+          data-website-id="0af0b7bb-b796-4564-8dd6-99d49831ae38"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
