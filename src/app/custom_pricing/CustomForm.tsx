@@ -2,7 +2,7 @@ import { useForm, ValidationError } from "@formspree/react";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -17,6 +17,32 @@ const CustomForm = ({ price, services }: Props) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
+  const [finalPrice, setFinalPrice] = useState(price);
+  const [discount, setDiscount] = useState(false);
+  const [isTenPercentChecked, setIsTenPercentChecked] = useState(false);
+  const [isTwentyPercentChecked, setIsTwentyPercentChecked] = useState(false);
+
+  const handleTenPercentDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsTenPercentChecked(e.target.checked);
+    setDiscount(!discount);
+    if (!discount) {
+      setFinalPrice(price * 0.9);
+    } else {
+      setFinalPrice(price);
+    }
+  };
+
+  const handleTwentyPercentDiscount = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setIsTwentyPercentChecked(e.target.checked);
+    setDiscount(!discount);
+    if (!discount) {
+      setFinalPrice(price * 0.8);
+    } else {
+      setFinalPrice(price);
+    }
+  };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!agreed) {
@@ -79,13 +105,42 @@ const CustomForm = ({ price, services }: Props) => {
           Személyreszabott csomag
         </h4>
         <p className="max-[360px]:text-2xl text-3xl sm:text-4xl font-bold">
-          {price.toLocaleString("de-DE")} Ft
+          {finalPrice.toLocaleString("de-DE")} Ft
         </p>
       </div>
-
       <form onSubmit={handleFormSubmit} className="space-y-10">
-        <input type="hidden" name="price" value={price} />
+        <input type="hidden" name="price" value={finalPrice} />
         <input type="hidden" name="services" value={JSON.stringify(services)} />
+        <div className="space-y-6">
+          <p>
+            7 személyes autóknál 10%, 9 személyes autóknál pedig 20% kedvezmény
+            igényelhető!
+          </p>
+          <div className="space-y-4">
+            <div className="flex gap-3 items-center">
+              <input
+                type="checkbox"
+                id="discount-10"
+                name="discount-10"
+                onChange={handleTenPercentDiscount}
+                disabled={isTwentyPercentChecked}
+                className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
+              />
+              <label htmlFor="discount-10">7 személyes - 10%</label>
+            </div>
+            <div className="flex gap-3 items-center">
+              <input
+                type="checkbox"
+                id="discount-20"
+                name="discount-20"
+                onChange={handleTwentyPercentDiscount}
+                disabled={isTenPercentChecked}
+                className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
+              />
+              <label htmlFor="discount-20">9 személyes - 20%</label>
+            </div>
+          </div>
+        </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label

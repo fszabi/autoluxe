@@ -17,9 +17,35 @@ const PricingForm = ({ tierName, pkgName, pkgPrice, pkgServices }: Props) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
+  const [finalPrice, setFinalPrice] = useState(pkgPrice);
+  const [discount, setDiscount] = useState(false);
+  const [isTenPercentChecked, setIsTenPercentChecked] = useState(false);
+  const [isTwentyPercentChecked, setIsTwentyPercentChecked] = useState(false);
 
   console.log(tierName);
   console.log(pkgName, pkgPrice, pkgServices);
+
+  const handleTenPercentDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsTenPercentChecked(e.target.checked);
+    setDiscount(!discount);
+    if (!discount) {
+      setFinalPrice(pkgPrice * 0.9);
+    } else {
+      setFinalPrice(pkgPrice);
+    }
+  };
+
+  const handleTwentyPercentDiscount = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setIsTwentyPercentChecked(e.target.checked);
+    setDiscount(!discount);
+    if (!discount) {
+      setFinalPrice(pkgPrice * 0.8);
+    } else {
+      setFinalPrice(pkgPrice);
+    }
+  };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!agreed) {
@@ -81,16 +107,46 @@ const PricingForm = ({ tierName, pkgName, pkgPrice, pkgServices }: Props) => {
       <div className="p-5 sm:p-10 rounded-3xl border border-neutral-200 dark:border-neutral-800 space-y-5">
         <h4 className="font-semibold max-[360px]:text-sm">{pkgName}</h4>
         <p className="max-[360px]:text-2xl text-3xl sm:text-4xl font-bold">
-          {pkgPrice.toLocaleString("de-DE")} Ft
+          {finalPrice.toLocaleString("de-DE")} Ft
         </p>
       </div>
       <form onSubmit={handleFormSubmit} className="space-y-10">
-        <input type="hidden" name="price" value={pkgPrice} />
+        <input type="hidden" name="price" value={finalPrice} />
         <input
           type="hidden"
           name="services"
           value={JSON.stringify(pkgServices)}
         />
+        <div className="space-y-6">
+          <p>
+            7 személyes autóknál 10%, 9 személyes autóknál pedig 20% kedvezmény
+            igényelhető!
+          </p>
+          <div className="space-y-3">
+            <div className="flex gap-3 items-center">
+              <input
+                type="checkbox"
+                id="discount-10"
+                name="discount-10"
+                onChange={handleTenPercentDiscount}
+                disabled={isTwentyPercentChecked}
+                className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
+              />
+              <label htmlFor="discount-10">7 személyes - 10%</label>
+            </div>
+            <div className="flex gap-3 items-center">
+              <input
+                type="checkbox"
+                id="discount-20"
+                name="discount-20"
+                onChange={handleTwentyPercentDiscount}
+                disabled={isTenPercentChecked}
+                className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
+              />
+              <label htmlFor="discount-20">9 személyes - 20%</label>
+            </div>
+          </div>
+        </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label
