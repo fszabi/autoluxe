@@ -59,9 +59,9 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Script
+          defer
           src="https://eu.umami.is/script.js"
           data-website-id="0af0b7bb-b796-4564-8dd6-99d49831ae38"
-          strategy="afterInteractive"
         />
       </body>
     </html>
