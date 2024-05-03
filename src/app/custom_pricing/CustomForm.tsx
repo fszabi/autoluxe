@@ -109,6 +109,11 @@ const CustomForm = ({ price, services }: Props) => {
         </p>
       </div>
       <form onSubmit={handleFormSubmit} className="space-y-10">
+        <input
+          type="hidden"
+          name="personalised-package"
+          value="Személyreszabott csomag"
+        />
         <input type="hidden" name="price" value={finalPrice} />
         <input type="hidden" name="services" value={JSON.stringify(services)} />
         <div className="space-y-6">
