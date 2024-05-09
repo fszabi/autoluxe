@@ -2,15 +2,16 @@ import { useForm, ValidationError } from "@formspree/react";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 interface Props {
   price: number;
   services: string[];
+  reset: () => void;
 }
 
-const CustomForm = ({ price, services }: Props) => {
+const CustomForm = ({ price, services, reset }: Props) => {
   const [state, handleSubmit] = useForm("mleqvejl");
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -51,6 +52,7 @@ const CustomForm = ({ price, services }: Props) => {
       return;
     }
     handleSubmit(e);
+    reset();
   };
 
   const handleEmailChange = () => {

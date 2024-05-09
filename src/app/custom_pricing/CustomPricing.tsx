@@ -353,6 +353,7 @@ const CustomPricing = () => {
                             <CustomForm
                               price={totalPrice}
                               services={services}
+                              reset={resetStates}
                             />
                             <button
                               onClick={closeModal}
