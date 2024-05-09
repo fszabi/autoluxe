@@ -13,7 +13,7 @@ interface Props {
 }
 
 const PricingForm = ({ tierName, pkgName, pkgPrice, pkgServices }: Props) => {
-  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_PRICING_FORM!);
+  const [state, handleSubmit] = useForm("mqkrjkpb");
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
