@@ -102,8 +102,10 @@ const PricingForm = ({ tierName, pkgName, pkgPrice, pkgServices }: Props) => {
     <div className="space-y-10">
       <h3 className="text-2xl font-semibold">{tierName}</h3>
       <div className="p-5 sm:p-10 rounded-3xl border border-neutral-200 dark:border-neutral-800 space-y-5">
-        <h4 className="font-semibold max-[360px]:text-sm">{pkgName}</h4>
-        <p className="max-[360px]:text-2xl text-3xl sm:text-4xl font-bold">
+        <h4 className="font-semibold max-[360px]:text-xs max-[390px]:text-sm">
+          {pkgName}
+        </h4>
+        <p className="max-[390px]:text-2xl text-3xl sm:text-4xl font-bold">
           {finalPrice.toLocaleString("de-DE")} Ft
         </p>
       </div>

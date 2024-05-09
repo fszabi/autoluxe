@@ -99,10 +99,10 @@ const CustomForm = ({ price, services }: Props) => {
   return (
     <div className="space-y-10">
       <div className="p-5 sm:p-10 rounded-3xl border border-neutral-200 dark:border-neutral-800 space-y-5">
-        <h4 className="font-semibold max-[360px]:text-sm">
+        <h4 className="font-semibold max-[360px]:text-xs max-[390px]:text-sm">
           Személyreszabott csomag
         </h4>
-        <p className="max-[360px]:text-2xl text-3xl sm:text-4xl font-bold">
+        <p className="max-[390px]:text-2xl text-3xl sm:text-4xl font-bold">
           {finalPrice.toLocaleString("de-DE")} Ft
         </p>
       </div>
