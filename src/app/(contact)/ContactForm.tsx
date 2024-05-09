@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const ContactForm = () => {
-  const [state, handleSubmit] = useForm("tt");
+  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_CONTACT_FORM!);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const [agreed, setAgreed] = useState(false);
