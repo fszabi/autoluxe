@@ -7,31 +7,31 @@ const serviceCategories = [
         price: 2500,
       },
       {
-        name: "Ablakok tisztítása",
+        name: "Ablakpucolás",
         price: 1500,
       },
       {
-        name: "Lábtörlők tisztítása",
+        name: "Gumiszőnyeg tisztítás",
         price: 2000,
       },
       {
-        name: "Műanyagok tisztítása és ápolása",
+        name: "Műanyagok tisztítása",
         price: 2500,
       },
       {
-        name: "Bőr tisztítása és ápolása",
+        name: "Bőr tisztítás és ápolás",
         price: 4000,
       },
       {
-        name: "Csomagtér tisztítása",
+        name: "Csomagtér",
         price: 5000,
       },
       {
-        name: "Teljes szőnyegzet mélytisztítása",
+        name: "Szőnyegek mélytisztítása",
         price: 5000,
       },
       {
-        name: "Illatosítás és szagtalanítás",
+        name: "Illatosítás",
         price: 1000,
       },
       {
@@ -48,19 +48,19 @@ const serviceCategories = [
         price: 5000,
       },
       {
-        name: "Bogároldás",
-        price: 1000,
-      },
-      {
         name: "Ablakpucolás",
         price: 1500,
       },
       {
-        name: "Felnik tisztítása",
+        name: "Bogároldás",
+        price: 1000,
+      },
+      {
+        name: "Felni tisztítás",
         price: 2000,
       },
       {
-        name: "Gumi tisztítás és ápolás",
+        name: "Gumiabroncs tisztítás",
         price: 2000,
       },
       {

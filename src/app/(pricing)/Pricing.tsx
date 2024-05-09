@@ -60,7 +60,7 @@ const Pricing = () => {
                   <div
                     key={pkg.key}
                     className={classNames({
-                      "p-10 rounded-3xl border border-neutral-200 dark:border-neutral-800 space-y-5 hover:scale-[1.05] transition-transform duration-300":
+                      "p-10 rounded-3xl border border-neutral-200 dark:border-neutral-800 space-y-5 lg:hover:scale-[1.05] transition-transform duration-300":
                         true,
                       "bg-gray-900 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900":
                         pkgIndex === 2,
