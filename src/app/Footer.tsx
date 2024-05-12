@@ -86,7 +86,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5">
           <p className="text-center text-base">
-            &copy; 2024 Gösi & Kertész Services, Minden jog fenntartva.
+            &copy; 2024 AutoLuxe, Minden jog fenntartva.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-3">
             <p className="text-center">A weboldalt készítette</p>

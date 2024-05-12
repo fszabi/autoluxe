@@ -34,12 +34,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/assets/favicon/favicon.webp",
   },
-  title: "Gösi & Kertész Services",
+  title: "AutoLuxe - Mobil autókozmetika",
   description:
     "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",
   openGraph: {
     images: "/assets/images/car.jpg",
-    title: "Gösi & Kertész Services",
+    title: "AutoLuxe - Mobil autókozmetika",
     description:
       "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",
   },

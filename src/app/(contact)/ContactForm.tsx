@@ -15,7 +15,7 @@ const ContactForm = () => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!agreed) {
-      toast.error("Az adatvédelmi nyilatkozatot el kell fogadnia!", {
+      toast.error("Az adatvédelmi tájékoztatót el kell fogadnia!", {
         id: "no-agreement-contact",
       });
       e.preventDefault();
@@ -184,7 +184,7 @@ const ContactForm = () => {
               })}
             >
               <span className="sr-only">
-                Adatvédelmi nyilatkozat elfogadása
+                Adatvédelmi tájékoztató elfogadása
               </span>
               <span
                 aria-hidden="true"
@@ -197,11 +197,11 @@ const ContactForm = () => {
               />
             </Switch>
           </div>
-          <Switch.Label className="text-sm leading-6 text-neutral-600 dark:text-neutral-200">
+          <Switch.Label className="text-sm leading-6 text-neutral-600 dark:text-neutral-200 cursor-pointer">
             Elfogadom az{" "}
-            <Link href="#" className="font-semibold text-blue-500">
-              adatvédelmi&nbsp;nyilatkozatot
-            </Link>
+            <span className="font-semibold text-blue-500">
+              adatvédelmi&nbsp;tájékoztatót
+            </span>
             .
           </Switch.Label>
         </Switch.Group>
