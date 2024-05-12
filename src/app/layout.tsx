@@ -14,7 +14,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gosi-kertesz.hu/"),
+  metadataBase: new URL("https://autoluxe.hu/"),
   keywords: [
     "házhoz jön autómosó",
     "autómosás",
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     "mosonmagyaróvár autómosás",
   ],
   icons: {
-    icon: "/assets/favicon/favicon.webp",
+    icon: "/assets/favicon/favicon.ico",
   },
   title: "AutoLuxe - Mobil autókozmetika",
   description:
     "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",
   openGraph: {
-    images: "/assets/images/car.jpg",
+    images: ["/assets/images/car.jpg"],
     title: "AutoLuxe - Mobil autókozmetika",
     description:
       "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",

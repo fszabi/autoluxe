@@ -22,7 +22,7 @@ const features = [
   {
     name: "Házhoz megyünk",
     description:
-      "Akár otthona kényelméből élvezheti, ahogy autóját tisztává varázsoljuk!",
+      "Otthona kényelméből élvezheti, ahogy autóját tisztává varázsoljuk!",
     icon: HomeIcon,
   },
 ];

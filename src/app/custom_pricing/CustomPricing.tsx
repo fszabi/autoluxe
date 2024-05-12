@@ -268,7 +268,10 @@ const CustomPricing = () => {
                               className="checkbox bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 [--chkbg:theme(colors.blue.500)] [--chkfg:white] disabled:bg-neutral-300 dark:disabled:bg-neutral-700"
                             />
                           )}
-                          <label htmlFor={service.name}>
+                          <label
+                            htmlFor={service.name}
+                            className="hover:opacity-70 transition-opacity cursor-pointer"
+                          >
                             {service.name === "Ülések mélytisztítása"
                               ? `${
                                   service.name

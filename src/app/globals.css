@@ -1,3 +1,33 @@
 @tailwind base;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  *::-webkit-scrollbar {
+    @apply bg-neutral-50 dark:bg-neutral-900 w-2 h-2;
+  }
+
+  *::-webkit-scrollbar-track {
+    @apply my-2;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-[100vw] bg-blue-500;
+  }
+
+  picture {
+    @apply block align-middle;
+  }
+
+  picture,
+  svg {
+    @apply max-w-full h-auto;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
