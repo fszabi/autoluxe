@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { Fragment, useState } from "react";
 import tiers from "../utils/tiers";
 import PricingForm from "./PricingForm";
+import Link from "next/link";
 
 type Pkg = {
   name: string;
@@ -16,27 +17,27 @@ type Pkg = {
 };
 
 const Pricing = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [pkgName, setPkgName] = useState("");
-  const [tierName, setTierName] = useState("");
-  const [pkgServices, setPkgServices] = useState<string[]>([]);
-  const [pkgPrice, setPkgPrice] = useState(0);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [pkgName, setPkgName] = useState("");
+  // const [tierName, setTierName] = useState("");
+  // const [pkgServices, setPkgServices] = useState<string[]>([]);
+  // const [pkgPrice, setPkgPrice] = useState(0);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
-  const handleOpen = (pkg: Pkg, tierName: string) => {
-    setTierName(tierName);
-    setPkgName(pkg.name);
-    setPkgPrice(pkg.price);
-    setPkgServices(pkg.services);
-    openModal();
-  };
+  // const handleOpen = (pkg: Pkg, tierName: string) => {
+  //   setTierName(tierName);
+  //   setPkgName(pkg.name);
+  //   setPkgPrice(pkg.price);
+  //   setPkgServices(pkg.services);
+  //   openModal();
+  // };
 
   return (
     <div id="pricing" className="py-24 sm:py-32">
@@ -70,19 +71,20 @@ const Pricing = () => {
                     <p className="text-3xl sm:text-4xl font-bold">
                       {pkg.price.toLocaleString("de-DE")} Ft
                     </p>
-                    <button
-                      onClick={() => {
-                        handleOpen(pkg, tier.name);
-                      }}
+                    <Link
+                      href="#custom-pricing"
+                      // onClick={() => {
+                      //   handleOpen(pkg, tier.name);
+                      // }}
                       className={classNames({
-                        "bg-blue-500 hover:bg-blue-400 transition-colors text-neutral-50 py-2 px-4 rounded-md font-semibold text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600":
+                        "block w-fit bg-blue-500 hover:bg-blue-400 transition-colors text-neutral-50 py-2 px-4 rounded-md font-semibold text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600":
                           true,
                         "bg-white/10 hover:bg-white/20 dark:bg-neutral-600 dark:hover:bg-neutral-500 focus-visible:outline-neutral-400 dark:focus-visible:outline-neutral-700":
                           pkgIndex === 2,
                       })}
                     >
                       Ezt választom
-                    </button>
+                    </Link>
                     <ul className="space-y-4">
                       {pkg.services.map((service, index) => (
                         <div
@@ -116,7 +118,7 @@ const Pricing = () => {
             </div>
           ))}
         </div>
-        <Transition appear show={isOpen} as={Fragment}>
+        {/* <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
             <Transition.Child
               as={Fragment}
@@ -159,7 +161,7 @@ const Pricing = () => {
               </div>
             </div>
           </Dialog>
-        </Transition>
+        </Transition> */}
       </div>
     </div>
   );

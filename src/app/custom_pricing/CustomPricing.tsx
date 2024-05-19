@@ -150,14 +150,14 @@ const CustomPricing = () => {
   };
 
   return (
-    <div className="py-24 sm:py-32">
+    <div id="custom-pricing" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto lg:max-w-2xl sm:text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-500">
-            Személyreszabott csomag
+            Csomag összerakó
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-            Állítson össze egy a saját igényére szabott csomagot.
+            Válasszon, vagy állítsa össze csomagját igényei szerint.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl rounded-3xl border border-neutral-200 dark:border-neutral-800 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
@@ -168,13 +168,11 @@ const CustomPricing = () => {
             {!showTiers && !showServices && (
               <div className="space-y-8">
                 <div className="space-y-3">
-                  <p className="text-xl font-semibold">
-                    Személyreszabott csomag
-                  </p>
+                  <p className="text-xl font-semibold">Csomag összerakó</p>
                   <h3 className="font-medium">
-                    Itt lehetősége van egy kiválasztott csomaghoz plusz
-                    szolgáltatásokat kérni, illetve teljesen a saját autójára is
-                    szabhatja!
+                    Itt lehetősége van a csomag(ok)at választani, illetve igény
+                    szerint kiegészítheti plusz szolgáltatásokkal, vagy teljesen
+                    a saját autójára is szabhatja!
                   </h3>
                 </div>
                 <div className="flex flex-wrap gap-5">
@@ -228,7 +226,7 @@ const CustomPricing = () => {
                   }}
                   className="block w-fit rounded-md bg-blue-500 text-neutral-50 px-3 py-2 text-center text-sm font-semibold shadow-sm hover:bg-blue-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
-                  Tovább a szolgáltatásokhoz
+                  Kiegészítő szolgáltatások
                 </button>
               </div>
             )}
