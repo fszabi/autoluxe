@@ -40,7 +40,7 @@ const Pricing = () => {
   // };
 
   return (
-    <div id="pricing" className="py-24 sm:py-32">
+    <div id="csomagok" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-20">
         <div className="mx-auto lg:max-w-2xl sm:text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-500">
@@ -72,7 +72,7 @@ const Pricing = () => {
                       {pkg.price.toLocaleString("de-DE")} Ft
                     </p>
                     <Link
-                      href="#custom-pricing"
+                      href="#csomagosszerako"
                       // onClick={() => {
                       //   handleOpen(pkg, tier.name);
                       // }}

@@ -2,7 +2,10 @@ import ContactForm from "./ContactForm";
 
 const Contact = () => {
   return (
-    <div className="relative isolate px-6 py-24 sm:py-32 lg:px-8 space-y-10">
+    <div
+      id="kapcsolat"
+      className="relative isolate px-6 py-24 sm:py-32 lg:px-8 space-y-10"
+    >
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem] pointer-events-none"
         aria-hidden="true"
