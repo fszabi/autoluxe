@@ -7,7 +7,7 @@ const serviceCategories = [
         price: 2500,
       },
       {
-        name: "Ablakpucolás",
+        name: "Belső ablakpucolás",
         price: 1500,
       },
       {
@@ -48,7 +48,7 @@ const serviceCategories = [
         price: 5000,
       },
       {
-        name: "Ablakpucolás",
+        name: "Külső ablakpucolás",
         price: 1500,
       },
       {

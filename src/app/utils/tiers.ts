@@ -10,7 +10,7 @@ const tiers = [
         services: [
           "Porszívózás",
           "Portalanítás",
-          "Ablakpucolás",
+          "Belső ablakpucolás",
           "Gumiszőnyeg tisztítás",
         ],
         price: 5000,
@@ -22,7 +22,7 @@ const tiers = [
         services: [
           "Porszívózás",
           "Portalanítás",
-          "Ablakpucolás",
+          "Belső ablakpucolás",
           "Gumiszőnyeg tisztítás",
           "Műanyagok tisztítása",
           "Bőr tisztítás és ápolás",
@@ -38,7 +38,7 @@ const tiers = [
         services: [
           "Porszívózás",
           "Portalanítás",
-          "Ablakpucolás",
+          "Belső ablakpucolás",
           "Gumiszőnyeg tisztítás",
           "Műanyagok tisztítása",
           "Bőr tisztítás és ápolás",
@@ -59,7 +59,7 @@ const tiers = [
         name: "Alap csomag",
         tier: "kulso",
         key: "kulso-alap",
-        services: ["Samponos mosás", "Ablakpucolás"],
+        services: ["Samponos mosás", "Külső ablakpucolás"],
         price: 5000,
       },
       {
@@ -68,7 +68,7 @@ const tiers = [
         key: "kulso-extra",
         services: [
           "Samponos mosás",
-          "Ablakpucolás",
+          "Külső ablakpucolás",
           "Bogároldás",
           "Felni tisztítás",
           "Gumiabroncs tisztítás",
@@ -81,7 +81,7 @@ const tiers = [
         key: "kulso-premium",
         services: [
           "Samponos mosás",
-          "Ablakpucolás",
+          "Külső ablakpucolás",
           "Bogároldás",
           "Felni tisztítás",
           "Gumiabroncs tisztítás",
