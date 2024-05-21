@@ -20,8 +20,8 @@ const navigation = {
       icon: PhoneIcon,
     },
     {
-      name: "info@gosi-kertesz.hu",
-      href: "mailto:info@gosi-kertesz.hu",
+      name: "info@autoluxe.hu",
+      href: "mailto:info@autoluxe.hu",
       icon: EnvelopeIcon,
     },
   ],
