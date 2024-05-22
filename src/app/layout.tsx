@@ -52,16 +52,16 @@ export default function RootLayout({
 }>) {
   return (
     <html className="scroll-smooth" lang="en" suppressHydrationWarning>
+      <Script
+        defer
+        src="https://unpkg.com/@tinybirdco/flock.js"
+        data-host="https://api.tinybird.co"
+        data-token="p.eyJ1IjogIjA0ODI5ZGMwLTk4NGUtNGFiYi04YjYyLWQ1ZGMzOGZjYmY4MCIsICJpZCI6ICI1NWViN2UxMy1hZjZhLTRhNzgtOGNjOS1iM2ZhZWYxZmFhNjgiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.8M8aF3sEe1BK1VnArUUOkVd1WcVOLM535WzVpVJJ_cA"
+        strategy="afterInteractive"
+      />
       <body
         className={`${montserrat.variable} font-montserrat bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50`}
       >
-        <Script
-          defer
-          src="https://unpkg.com/@tinybirdco/flock.js"
-          data-host="https://api.tinybird.co"
-          data-token="p.eyJ1IjogIjA0ODI5ZGMwLTk4NGUtNGFiYi04YjYyLWQ1ZGMzOGZjYmY4MCIsICJpZCI6ICI1NWViN2UxMy1hZjZhLTRhNzgtOGNjOS1iM2ZhZWYxZmFhNjgiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.8M8aF3sEe1BK1VnArUUOkVd1WcVOLM535WzVpVJJ_cA"
-          strategy="afterInteractive"
-        />
         <ThemeProvider defaultTheme="system" attribute="class">
           {children}
         </ThemeProvider>
