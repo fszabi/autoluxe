@@ -170,7 +170,7 @@ const CustomPricing = () => {
                 <div className="space-y-3">
                   <p className="text-xl font-semibold">Csomag összerakó</p>
                   <h3 className="font-medium">
-                    Itt lehetősége van a csomago(ka)t választani, illetve igény
+                    Itt lehetősége van a csomago(ka)t választani, majd igény
                     szerint kiegészítheti plusz szolgáltatásokkal, vagy teljesen
                     a saját autójára is szabhatja!
                   </h3>
