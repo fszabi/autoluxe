@@ -41,6 +41,7 @@ const CustomPricing = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [prevValue, setPrevValue] = useState(0);
   const [services, setServices] = useState<string[]>([]);
+  const [packages, setPackages] = useState<{ [tier: string]: string }>({});
   const [filteredServiceCategories, setFilteredServiceCategories] = useState<
     ServiceCategory[]
   >([]);
@@ -147,6 +148,7 @@ const CustomPricing = () => {
     setTotalPrice(0);
     setPrevValue(0);
     setServices([]);
+    setPackages({});
   };
 
   return (
@@ -202,6 +204,22 @@ const CustomPricing = () => {
                       className="select w-full bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
                       onChange={(e) => {
                         handlePackageSelect(e, tier);
+                        setPackages((prevPackages) => {
+                          if (e.target.value === "") {
+                            // If nothing is selected, remove the key-value pair from the state
+                            const newPackages = { ...prevPackages };
+                            delete newPackages[tier.key];
+                            return newPackages;
+                          } else {
+                            // If something is selected, add or update the key-value pair in the state
+                            return {
+                              ...prevPackages,
+                              [tier.key]: e.target.value,
+                            };
+                          }
+                        });
+
+                        console.log(packages);
                       }}
                     >
                       <option value="">-</option>
@@ -354,6 +372,7 @@ const CustomPricing = () => {
                             <CustomForm
                               price={totalPrice}
                               services={services}
+                              packages={packages}
                               reset={resetStates}
                             />
                             <button

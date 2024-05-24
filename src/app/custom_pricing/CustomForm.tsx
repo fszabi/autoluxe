@@ -7,10 +7,11 @@ import toast from "react-hot-toast";
 interface Props {
   price: number;
   services: string[];
+  packages: { [tier: string]: string };
   reset: () => void;
 }
 
-const CustomForm = ({ price, services, reset }: Props) => {
+const CustomForm = ({ price, services, packages, reset }: Props) => {
   const [state, handleSubmit] = useForm("xayrzegj");
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -108,13 +109,10 @@ const CustomForm = ({ price, services, reset }: Props) => {
         </p>
       </div>
       <form onSubmit={handleFormSubmit} className="space-y-10">
-        <input
-          type="hidden"
-          name="personalised-package"
-          value="Személyreszabott csomag"
-        />
+        <input type="hidden" name="packages" value={JSON.stringify(packages)} />
         <input type="hidden" name="price" value={finalPrice} />
         <input type="hidden" name="services" value={JSON.stringify(services)} />
+
         <div className="space-y-6">
           <p>
             7 személyes autóknál 10%, 9 személyes autóknál pedig 20% felárat
