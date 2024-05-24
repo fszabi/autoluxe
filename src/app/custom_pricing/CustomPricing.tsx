@@ -40,11 +40,16 @@ const CustomPricing = () => {
   const [outsidePrice, setOutsidePrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [prevValue, setPrevValue] = useState(0);
-  const [services, setServices] = useState<string[]>([]);
   const [packages, setPackages] = useState<{ [tier: string]: string }>({});
+  const [packageServices, setPackageServices] = useState<string[]>([]);
+  const [services, setServices] = useState<string[]>([]);
   const [filteredServiceCategories, setFilteredServiceCategories] = useState<
     ServiceCategory[]
   >([]);
+
+  useEffect(() => {
+    console.log(services);
+  }, [services]);
 
   useEffect(() => {
     setTotalPrice(insidePrice + outsidePrice);
@@ -55,7 +60,7 @@ const CustomPricing = () => {
       .map((category: ServiceCategory) => ({
         ...category,
         services: category.services.filter(
-          (service) => !services.includes(service.name)
+          (service) => !packageServices.includes(service.name)
         ),
       }))
       .filter((category) => category.services.length > 0);
@@ -84,12 +89,20 @@ const CustomPricing = () => {
         setOutsidePrice(selectedPkg.price);
       }
 
-      const servicesWithoutCurrentTier = services.filter(
-        (service) =>
-          !tier.packages.some((pkg) => pkg.services.includes(service))
+      const packageServicesWithoutCurrentTier = packageServices.filter(
+        (packageService) =>
+          !tier.packages.some((pkg) => pkg.services.includes(packageService))
       );
 
-      setServices([...servicesWithoutCurrentTier, ...selectedPkg.services]);
+      setPackageServices([
+        ...packageServicesWithoutCurrentTier,
+        ...selectedPkg.services,
+      ]);
+
+      setPackages((prevPackages) => ({
+        ...prevPackages,
+        [tier.key]: e.target.value,
+      }));
     } else {
       if (tier.key === "belso") {
         setInsidePrice(0);
@@ -97,12 +110,18 @@ const CustomPricing = () => {
         setOutsidePrice(0);
       }
 
-      const servicesWithoutCurrentTier = services.filter(
-        (service) =>
-          !tier.packages.some((pkg) => pkg.services.includes(service))
+      const servicesWithoutCurrentTier = packageServices.filter(
+        (packageService) =>
+          !tier.packages.some((pkg) => pkg.services.includes(packageService))
       );
 
-      setServices(servicesWithoutCurrentTier);
+      setPackageServices(servicesWithoutCurrentTier);
+
+      setPackages((prevPackages) => {
+        const newPackages = { ...prevPackages };
+        delete newPackages[tier.key];
+        return newPackages;
+      });
     }
   };
 
@@ -112,12 +131,9 @@ const CustomPricing = () => {
   ) => {
     if (e.target.checked) {
       setTotalPrice(totalPrice + service.price);
-      // Add the service to the services array
-
       setServices((prevServices) => [...prevServices, service.name]);
     } else {
       setTotalPrice(totalPrice - service.price);
-      // Remove the service from the services array
       setServices((prevServices) =>
         prevServices.filter((s) => s !== service.name)
       );
@@ -129,14 +145,28 @@ const CustomPricing = () => {
     service: Service
   ) => {
     const newValue = parseInt(e.target.value);
-    const priceDifference = newValue - prevValue;
-    setTotalPrice(totalPrice + priceDifference * service.price);
+    setTotalPrice(totalPrice + (newValue - prevValue) * service.price);
     setPrevValue(newValue);
+    const newService = `${service.name} - ${newValue} db`;
 
-    if (services.includes(service.name)) {
-      setServices(services.filter((s) => s !== service.name));
+    if (
+      services.some((service) => service.startsWith("Ülések mélytisztítása"))
+    ) {
+      if (newValue === 0) {
+        setServices((prevServices) =>
+          prevServices.filter(
+            (service) => !service.startsWith("Ülések mélytisztítása")
+          )
+        );
+      } else {
+        setServices((prevServices) =>
+          prevServices.map((service) =>
+            service.startsWith("Ülések mélytisztítása") ? newService : service
+          )
+        );
+      }
     } else {
-      setServices([...services, service.name]);
+      setServices((prevServices) => [...prevServices, newService]);
     }
   };
 
@@ -147,8 +177,9 @@ const CustomPricing = () => {
     setOutsidePrice(0);
     setTotalPrice(0);
     setPrevValue(0);
-    setServices([]);
     setPackages({});
+    setPackageServices([]);
+    setServices([]);
   };
 
   return (
@@ -204,22 +235,6 @@ const CustomPricing = () => {
                       className="select w-full bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 disabled:border-0 disabled:text-neutral-400 dark:disabled:bg-neutral-800 dark:disabled:text-neutral-600"
                       onChange={(e) => {
                         handlePackageSelect(e, tier);
-                        setPackages((prevPackages) => {
-                          if (e.target.value === "") {
-                            // If nothing is selected, remove the key-value pair from the state
-                            const newPackages = { ...prevPackages };
-                            delete newPackages[tier.key];
-                            return newPackages;
-                          } else {
-                            // If something is selected, add or update the key-value pair in the state
-                            return {
-                              ...prevPackages,
-                              [tier.key]: e.target.value,
-                            };
-                          }
-                        });
-
-                        console.log(packages);
                       }}
                     >
                       <option value="">-</option>
@@ -233,7 +248,7 @@ const CustomPricing = () => {
                 ))}
                 <button
                   onClick={() => {
-                    if (services.length > 0) {
+                    if (packageServices.length > 0) {
                       setShowTiers(false);
                       setShowServices(true);
                     } else {
@@ -261,8 +276,6 @@ const CustomPricing = () => {
                         >
                           {service.name === "Ülések mélytisztítása" ? (
                             <select
-                              id={service.name}
-                              name={service.name}
                               onChange={(e) => {
                                 handleServiceSelect(e, service);
                               }}
