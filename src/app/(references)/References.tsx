@@ -134,7 +134,7 @@ const References = () => {
   return (
     <div id="referenciak" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 gap-16">
           <div className="space-y-16">
             <div>
               <h2 className="text-base font-semibold leading-7 text-blue-500">
@@ -206,7 +206,7 @@ const References = () => {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Panel className="w-[90%] max-w-4xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
                     <button
                       onClick={closeModal}
                       className="absolute top-3 right-3 md:top-5 md:right-5"
@@ -216,7 +216,7 @@ const References = () => {
                     {currentReference && (
                       <div className="space-y-8">
                         <Image
-                          className="w-full rounded-xl h-[800px] object-cover mx-auto"
+                          className="w-full rounded-xl object-cover mx-auto"
                           src={currentReference.modalImages[currentIndex]}
                           alt={currentReference.title}
                         />
