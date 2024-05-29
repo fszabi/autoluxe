@@ -382,18 +382,18 @@ const CustomPricing = () => {
                           leaveTo="opacity-0 scale-95"
                         >
                           <Dialog.Panel className="w-[80%] max-w-3xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
+                            <button
+                              onClick={closeModal}
+                              className="absolute top-3 right-3 md:top-5 md:right-5"
+                            >
+                              <XMarkIcon className="h-7 w-7 text-neutral-600 dark:text-neutral-200" />
+                            </button>
                             <CustomForm
                               price={totalPrice}
                               services={services}
                               packages={packages}
                               reset={resetStates}
                             />
-                            <button
-                              onClick={closeModal}
-                              className="absolute top-3 right-3 md:top-5 md:right-5"
-                            >
-                              <XMarkIcon className="h-6 w-6 text-neutral-600 dark:text-neutral-200" />
-                            </button>
                           </Dialog.Panel>
                         </Transition.Child>
                       </div>

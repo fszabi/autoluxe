@@ -2,6 +2,7 @@ import Contact from "./(contact)/Contact";
 import Features from "./(features)/Features";
 import Hero from "./(hero)/Hero";
 import Pricing from "./(pricing)/Pricing";
+import References from "./(references)/References";
 import CustomPricing from "./custom_pricing/CustomPricing";
 import Toast from "./Toast";
 
@@ -11,6 +12,7 @@ const Main = () => {
       <Toast />
       <Hero />
       <Features />
+      <References />
       <Pricing />
       <CustomPricing />
       <Contact />
