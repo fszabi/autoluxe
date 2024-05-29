@@ -28,7 +28,7 @@ interface Reference {
 const references = [
   {
     category: "Külső tisztítás",
-    title: "Kocsi, helyszín",
+    title: "Jaguar F-Pace",
     image: reference1_1,
     modalImages: [
       reference1_1,
@@ -206,7 +206,7 @@ const References = () => {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-[90%] max-w-4xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Panel className="w-[90%] max-w-xl min-[2000px]:max-w-4xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
                     <button
                       onClick={closeModal}
                       className="absolute top-3 right-3 md:top-5 md:right-5"
@@ -216,7 +216,7 @@ const References = () => {
                     {currentReference && (
                       <div className="space-y-8">
                         <Image
-                          className="w-full rounded-xl object-cover mx-auto"
+                          className="max-h-[1000px] w-full rounded-xl object-cover mx-auto"
                           src={currentReference.modalImages[currentIndex]}
                           alt={currentReference.title}
                         />
