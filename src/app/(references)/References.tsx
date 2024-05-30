@@ -145,7 +145,7 @@ const References = () => {
               </p>
             </div>
 
-            {references.slice(0, 2).map((reference, index) => (
+            {references.slice(0, 1).map((reference, index) => (
               <div key={index} className="space-y-6">
                 <Image
                   className="w-full max-h-[500px] object-cover rounded-xl hover:opacity-60 hover:-translate-y-4 transition-all duration-300 cursor-pointer"
@@ -162,7 +162,7 @@ const References = () => {
               </div>
             ))}
           </div>
-          <div className="space-y-16">
+          {/* <div className="space-y-16">
             {references.slice(2).map((reference, index) => (
               <div key={index} className="space-y-6">
                 <Image
@@ -179,7 +179,7 @@ const References = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
