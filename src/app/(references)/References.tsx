@@ -138,10 +138,10 @@ const References = () => {
           <div className="space-y-16">
             <div>
               <h2 className="text-base font-semibold leading-7 text-blue-500">
-                Munkáink
+                Referenciák
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                Tekintse meg néhány munkánkat?
+                Tekintse meg néhány korábbi munkánkat
               </p>
             </div>
 
