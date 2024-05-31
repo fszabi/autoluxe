@@ -1,7 +1,7 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
 import reference1_1 from "/public/assets/images/reference1_1.webp";
+import reference1_10 from "/public/assets/images/reference1_10.webp";
 import reference1_2 from "/public/assets/images/reference1_2.webp";
 import reference1_3 from "/public/assets/images/reference1_3.webp";
 import reference1_4 from "/public/assets/images/reference1_4.webp";
@@ -10,16 +10,28 @@ import reference1_6 from "/public/assets/images/reference1_6.webp";
 import reference1_7 from "/public/assets/images/reference1_7.webp";
 import reference1_8 from "/public/assets/images/reference1_8.webp";
 import reference1_9 from "/public/assets/images/reference1_9.webp";
-import reference1_10 from "/public/assets/images/reference1_10.webp";
 import reference2_1 from "/public/assets/images/reference2_1.webp";
+import reference2_2 from "/public/assets/images/reference2_2.webp";
+import reference2_3 from "/public/assets/images/reference2_3.webp";
+import reference2_4 from "/public/assets/images/reference2_4.webp";
 import reference3_1 from "/public/assets/images/reference3_1.webp";
-import reference4_1 from "/public/assets/images/reference4_1.webp";
-import { Fragment, Ref, useState } from "react";
-import { Transition, Dialog } from "@headlessui/react";
+import reference3_2 from "/public/assets/images/reference3_2.webp";
+import reference3_3 from "/public/assets/images/reference3_3.webp";
+import reference3_4 from "/public/assets/images/reference3_4.webp";
+import reference3_5 from "/public/assets/images/reference3_5.webp";
+import reference3_6 from "/public/assets/images/reference3_6.webp";
+import reference4_1 from "/public/assets/images/reference4_1.jpg";
+import reference4_2 from "/public/assets/images/reference4_2.jpg";
+import reference4_3 from "/public/assets/images/reference4_3.jpg";
+import reference4_4 from "/public/assets/images/reference4_4.jpg";
+import reference4_5 from "/public/assets/images/reference4_5.jpg";
+import reference4_6 from "/public/assets/images/reference4_6.jpg";
+import Image, { StaticImageData } from "next/image";
+import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { Fragment, useState } from "react";
 
 interface Reference {
-  category: string;
   title: string;
   image: StaticImageData;
   modalImages: StaticImageData[];
@@ -27,12 +39,11 @@ interface Reference {
 
 const references = [
   {
-    category: "Külső tisztítás",
     title: "Jaguar F-Pace",
     image: reference1_1,
     modalImages: [
-      reference1_1,
       reference1_2,
+      reference1_1,
       reference1_3,
       reference1_4,
       reference1_5,
@@ -44,54 +55,32 @@ const references = [
     ],
   },
   {
-    category: "Külső tisztítás",
-    title: "Kocsi, helyszín",
+    title: "Mercedes-Benz CLA AMG",
     image: reference2_1,
-    modalImages: [
-      reference1_1,
-      reference1_2,
-      reference1_3,
-      reference1_4,
-      reference1_5,
-      reference1_6,
-      reference1_7,
-      reference1_8,
-      reference1_9,
-      reference1_10,
-    ],
+    modalImages: [reference2_2, reference2_1, reference2_3, reference2_4],
   },
   {
-    category: "Külső tisztítás",
-    title: "Kocsi, helyszín",
+    title: "Audi A6",
     image: reference3_1,
     modalImages: [
-      reference1_1,
-      reference1_2,
-      reference1_3,
-      reference1_4,
-      reference1_5,
-      reference1_6,
-      reference1_7,
-      reference1_8,
-      reference1_9,
-      reference1_10,
+      reference3_2,
+      reference3_1,
+      reference3_3,
+      reference3_4,
+      reference3_5,
+      reference3_6,
     ],
   },
   {
-    category: "Külső tisztítás",
-    title: "Kocsi, helyszín",
+    title: "Skoda Octavia",
     image: reference4_1,
     modalImages: [
-      reference1_1,
-      reference1_2,
-      reference1_3,
-      reference1_4,
-      reference1_5,
-      reference1_6,
-      reference1_7,
-      reference1_8,
-      reference1_9,
-      reference1_10,
+      reference4_2,
+      reference4_1,
+      reference4_3,
+      reference4_4,
+      reference4_5,
+      reference4_6,
     ],
   },
 ];
@@ -138,48 +127,43 @@ const References = () => {
           <div className="space-y-16">
             <div>
               <h2 className="text-base font-semibold leading-7 text-blue-500">
-                Referenciák
+                Referenciáink
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                Tekintse meg néhány korábbi munkánkat
+                Tekintse meg néhány korábbi munkáinkat
               </p>
             </div>
 
-            {references.slice(0, 1).map((reference, index) => (
+            {references.slice(0, 2).map((reference, index) => (
               <div key={index} className="space-y-6">
                 <Image
-                  className="w-full max-h-[500px] object-cover rounded-xl hover:opacity-60 hover:-translate-y-4 transition-all duration-300 cursor-pointer"
+                  className="w-full max-h-[500px] xl:h-[500px] object-cover rounded-xl hover:opacity-60 hover:-translate-y-4 transition-all duration-300 cursor-pointer"
                   src={reference.image}
                   alt={reference.title}
                   onClick={() => openModal(index)}
                 />
-                <div className="space-y-3">
-                  <p className="before:content-['\2014'] before:mr-2 text-blue-500 uppercase font-medium text-sm">
-                    {reference.category}
-                  </p>
-                  <p className="font-semibold text-xl">{reference.title}</p>
-                </div>
+
+                <p className="before:content-['\2014'] before:mr-2 text-blue-500 uppercase font-medium text-sm">
+                  {reference.title}
+                </p>
               </div>
             ))}
           </div>
-          {/* <div className="space-y-16">
-            {references.slice(2).map((reference, index) => (
-              <div key={index} className="space-y-6">
+          <div className="space-y-16">
+            {references.slice(2, 4).map((reference, index) => (
+              <div key={index + 2} className="space-y-6">
                 <Image
-                  className="w-full max-h-[500px] object-cover rounded-xl hover:opacity-60 hover:-translate-y-4 transition-all duration-300 cursor-pointer"
+                  className="w-full max-h-[500px] xl:h-[500px] object-cover rounded-xl hover:opacity-60 hover:-translate-y-4 transition-all duration-300 cursor-pointer"
                   src={reference.image}
                   alt={reference.title}
-                  onClick={() => openModal(index)}
+                  onClick={() => openModal(index + 2)}
                 />
-                <div className="space-y-3">
-                  <p className="before:content-['\2014'] before:mr-2 text-blue-500 uppercase font-medium text-sm">
-                    {reference.category}
-                  </p>
-                  <p className="font-semibold text-xl">{reference.title}</p>
-                </div>
+                <p className="before:content-['\2014'] before:mr-2 text-blue-500 uppercase font-medium text-sm">
+                  {reference.title}
+                </p>
               </div>
             ))}
-          </div> */}
+          </div>
         </div>
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -206,7 +190,7 @@ const References = () => {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-[90%] max-w-xl min-[2000px]:max-w-4xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Panel className="w-[90%] max-w-2xl min-[2000px]:max-w-4xl transform overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-900 p-10 sm:p-14 text-left align-middle shadow-xl transition-all">
                     <button
                       onClick={closeModal}
                       className="absolute top-3 right-3 md:top-5 md:right-5"
@@ -216,7 +200,7 @@ const References = () => {
                     {currentReference && (
                       <div className="space-y-8">
                         <Image
-                          className="max-h-[1000px] w-full rounded-xl object-cover mx-auto"
+                          className="min-[2000px]:max-h-[1000px] max-h-[600px] w-full rounded-xl object-cover mx-auto"
                           src={currentReference.modalImages[currentIndex]}
                           alt={currentReference.title}
                         />

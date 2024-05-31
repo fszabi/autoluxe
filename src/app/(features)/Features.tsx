@@ -3,7 +3,7 @@ import {
   ClockIcon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
-import car from "/public/assets/images/car.jpg";
+import car_cleaning from "/public/assets/images/car_cleaning.jpg";
 import Image from "next/image";
 
 const features = [
@@ -63,7 +63,7 @@ const Features2 = () => {
             </div>
           </div>
           <Image
-            src={car}
+            src={car_cleaning}
             alt="Product screenshot"
             className="w-full h-full object-cover rounded-xl shadow-xl"
           />
