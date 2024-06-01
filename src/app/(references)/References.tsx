@@ -1,15 +1,11 @@
 "use client";
 
 import reference1_1 from "/public/assets/images/reference1_1.webp";
-import reference1_10 from "/public/assets/images/reference1_10.webp";
 import reference1_2 from "/public/assets/images/reference1_2.webp";
 import reference1_3 from "/public/assets/images/reference1_3.webp";
 import reference1_4 from "/public/assets/images/reference1_4.webp";
 import reference1_5 from "/public/assets/images/reference1_5.webp";
 import reference1_6 from "/public/assets/images/reference1_6.webp";
-import reference1_7 from "/public/assets/images/reference1_7.webp";
-import reference1_8 from "/public/assets/images/reference1_8.webp";
-import reference1_9 from "/public/assets/images/reference1_9.webp";
 import reference2_1 from "/public/assets/images/reference2_1.webp";
 import reference2_2 from "/public/assets/images/reference2_2.webp";
 import reference2_3 from "/public/assets/images/reference2_3.webp";
@@ -48,10 +44,6 @@ const references = [
       reference1_4,
       reference1_5,
       reference1_6,
-      reference1_7,
-      reference1_8,
-      reference1_9,
-      reference1_10,
     ],
   },
   {
@@ -130,7 +122,7 @@ const References = () => {
                 Referenciáink
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                Tekintse meg néhány korábbi munkáinkat
+                Tekintse meg korábbi munkáinkat
               </p>
             </div>
 
