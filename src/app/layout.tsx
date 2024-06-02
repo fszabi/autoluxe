@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/assets/images/car.jpg"],
     title: "AutoLuxe - Mobil autókozmetika",
     description:
-      "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",
+      "Legyen szó autója külsejének mosásáról vagy belsejének tisztításáról ránk számíthat!",
   },
 };
 
