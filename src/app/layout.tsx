@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   title: "AutoLuxe - Mobil autókozmetika",
   description:
-    "Legyen szó autód külsejének mosásáról vagy belsejének tisztításáról ránk számíthatsz!",
+    "Legyen szó autója külsejének mosásáról vagy belsejének tisztításáról ránk számíthat!",
   openGraph: {
     images: ["/assets/images/car.jpg"],
     title: "AutoLuxe - Mobil autókozmetika",
