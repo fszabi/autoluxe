@@ -66,7 +66,7 @@ const CustomPricing = () => {
       .filter((category) => category.services.length > 0);
 
     setFilteredServiceCategories(initialFilteredServiceCategories);
-  }, [showServices]);
+  }, [showServices, packageServices]);
 
   const closeModal = () => {
     setIsOpen(false);
