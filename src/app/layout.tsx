@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="scroll-smooth" lang="en" suppressHydrationWarning>
+    <html className="scroll-smooth" lang="hu" suppressHydrationWarning>
       <Script
         defer
         src="https://unpkg.com/@tinybirdco/flock.js"
