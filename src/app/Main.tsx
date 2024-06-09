@@ -1,10 +1,9 @@
-import Chatbot from "./(chatbot)/Chatbot";
 import Contact from "./(contact)/Contact";
+import CustomPricing from "./(custom_pricing)/CustomPricing";
 import Features from "./(features)/Features";
 import Hero from "./(hero)/Hero";
 import Pricing from "./(pricing)/Pricing";
 import References from "./(references)/References";
-import CustomPricing from "./(custom_pricing)/CustomPricing";
 import Toast from "./Toast";
 
 const Main = () => {
@@ -17,7 +16,6 @@ const Main = () => {
       <Pricing />
       <CustomPricing />
       <Contact />
-      <Chatbot />
     </main>
   );
 };
